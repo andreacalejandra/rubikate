@@ -1,0 +1,43 @@
+doctype html
+html(lang='en')
+  include ../../inc/general/googleAnalistycs
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+  meta(http-equiv="content-language" content='es-VE, en')
+  meta(name="robots" content="follow")
+
+  title Rubikate | Publicaciones
+  // ICON CSS CDN
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+  link(href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet')
+  // CUSTOM CSS
+  link(rel='stylesheet' href='/css/custom/owner.min.css')
+  // CSS FRAMEWORK
+  link(rel='stylesheet' href='/css/vendor/materialize.min.css')
+
+  script(src='/js/vendor/jquery/jquery-3.6.0.min.js')
+
+body(data-barba="wrapper")
+  ul.transition
+    li
+    li
+    li
+    li
+    li
+    li
+    li
+  include ../../inc/site/navbar
+  include ../../inc/general/alert
+  main(data-barba="container" data-barba-namespace="home")
+    include ../../inc/site/up
+    block content
+  include ../../inc/site/footer
+
+  // VENDORS JS
+  script(src='/js/vendor/materialize.min.js')
+  script(src="https://unpkg.com/@barba/core")
+  script(data-barba-script src="/js/vendor/gsap/dist/gsap.min.js")
+  // CUSTOM JS
+  script(data-barba-script src='/js/custom/animation.min.js')
+  script(data-barba-script src='/js/custom/owner.min.js')

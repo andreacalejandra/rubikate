@@ -1,0 +1,219 @@
+extends ../layouts/site/index
+
+block content
+    .section
+        .row
+            .col.m12
+                p.f-2.center-align Solicitud de publikate
+                .card.bs-5.center-align
+                    .card-content.text-center
+                        p Desde el equipo de Rubikate, queremos darle la bienvenida y agradecer su interés en formar parte de esta gran familia. Te invitamos a llenar el siguiente formulario con la finalidad de conocer más de su Emprendimiento y/o Empresa, a la brevedad uno de nuestros Agentes de Atención al Cliente, le estará contactando para brindarle un servicio personalizado.
+                        .divider.mt-2.mb-2
+                        p ¿Posee usted un emprendimiento previamente registrado?
+                        p.mt-5
+                            label.me-5
+                                input(type='radio' name='option' value='1')#registered.with-gap.yellow
+                                span Si
+                            label
+                                input(type='radio' name='option' value='0')#register.with-gap.yellow
+                                span No
+        .row
+            .col.m8
+                #form_one
+                    .row
+                        .col.m12
+                            .card
+                                .card-content
+                                    p.mb-1 Datos personales
+                                    .divider
+                                    form(action='/plan/registered' method='POST' enctype='multipart/form-data')
+                                        input(type='hidden' value=idplan name='idplan')
+                                        input(type='hidden' value='rgd' name='type')
+                                        .row
+                                            .col.m12
+                                                .input-field.mb-3
+                                                    input(type='text' name='correo' required)#correo
+                                                    label(for='correo') Ingrese su correo electrónico previamente registrado
+                                        p.mb-1 Datos del emprendimiento
+                                        .divider
+                                        .row
+                                            .col.m6
+                                                .file-field.input-field.tooltipped(data-position='top' data-tooltip='Las imágenes ingresadas no pueden sobrepasar 1 megabyte.')
+                                                    p.mb-1 Logotipo del emprendimiento
+                                                    .btn.amber.accent-3.black-text
+                                                        span
+                                                            i.material-icons file_upload
+                                                            input(type='file' name='logo' required)#logo
+                                                    .file-path-wrapper
+                                                        input(type='text' placeholder='Logotipo del emprendimiento').file-path.validate
+                                            .col.m6.mt-3
+                                                p.mb-1 ¿Posee usted delivery?
+                                                select.browser-default(name='delivery' required)#delivery
+                                                    option(disabled selected) Elija entre las opciones disponibles
+                                                    option(value='1') Si
+                                                    option(value='0') No
+                                        .input-field.mb-3
+                                            input(name='emprendimiento' type='text' required)#emprendimiento
+                                            label(for='emprendimiento') Titulo de tu emprendimiento
+                                        .input-field.mb-3
+                                            textarea(placeholder='Cuentanos sobre tu emprendimiento' name='descripcion' required)#descripcion.materialize-textarea
+                                            label(for='descripcion') Cuentanos sobre tu emprendimiento
+                                        #address
+                                            .row
+                                                .col.m4
+                                                    label(for='estado') Elija un estado
+                                                    select.browser-default(name='estado' required)#estado2
+                                                .col.m4
+                                                    label(for='direccion') Elija una ciudad
+                                                    select.browser-default(name='municipio' required)#municipio2
+                                                .col.m4
+                                                    .input-field.mb-3
+                                                        label(for='direccion') Dirección
+                                                        input(type='text' name='direccion' required)#direccion
+                                        .row
+                                            .col.m12
+                                                .file-field.input-field.tooltipped(data-position='top' data-tooltip='Las imágenes ingresadas no pueden sobrepasar 1 megabyte. Y la resolución máxima debe ser 1500x500. Máximo 6 imágenes.')
+                                                    p.mb-1 Imágenes del emprendimiento 
+                                                        span.f-0.purple-text.text-bold (Opcional)
+                                                    .btn.amber.accent-3.black-text
+                                                        span
+                                                            i.material-icons file_upload
+                                                            input(type='file' name='images' multiple)#images
+                                                    .file-path-wrapper
+                                                        input(type='text' placeholder='Imágenes del emprendimiento').file-path.validate
+                                        .row
+                                            .col.m6
+                                                p.mb-1 Red Social 
+                                                    span.f-0.purple-text.text-bold (Opcional)
+                                                select.browser-default(name='redesSociales')#redesSocial
+                                                    option(selected disabled) Elija la red social que desea mostrar
+                                                    option(value='facebook') Facebook
+                                                    option(value='twitter') Twitter
+                                                    option(value='instagram') Instagram       
+                                            .col.m6
+                                                .input-field.mb-2
+                                                    p.mb-1 Indique el nombre de la red social 
+                                                        span.f-0.purple-text.text-bold (Opcional)
+                                                    input(type='text' name='url' placeholder='Indique el nombre de la red social')#url
+                                        .mb-3.center-align
+                                            button(type='submit').btn.purple.accent-4 Enviar solicitud 
+                #form_two
+                    .card.bs-5.has-rounded-md
+                        .card-content
+                            p.mb-1 Datos personales
+                            .divider
+                            form(action='/plan/register' method='POST' enctype='multipart/form-data')
+                                input(type='hidden' value=idplan name='idplan')
+                                .row
+                                    .col.m6
+                                        .input-field.mb-3
+                                            input(type='text' name='nombre' required)#nombre
+                                            label(for='nombre') Ingrese su nombre
+                                    .col.m6
+                                        .input-field.mb-3
+                                            input(type='text' name='apellido' required)#apellido
+                                            label(for='apellido') Ingrese su apellido
+                                .row
+                                    .col.m6
+                                        label(for='nacionalidad') Elija su nacionalidad
+                                        select.browser-default(name='nacionalidad' required)#nacionalidad
+                                            option(disabled selected) Elija su nacionalidad
+                                            option(value='V') Venezolano/a
+                                            option(value='E') Extranjero/a
+                                    .col.m6
+                                        .input-field.mb-3
+                                            input(type='number' name='ci' required)#documento
+                                            label(for='documento') Ingrese su documento de identidad
+                                .row
+                                    .col.m6
+                                        .input-field.mb-3
+                                            input(type='email' name='correo' required)#correo
+                                            label(for='correo') Ingrese su correo electrónico
+                                    .col.m6
+                                        .input-field.mb-3
+                                            input(type='number' name='telefono' required)#telefono
+                                            label(for='telefono') Ingrese su teléfono
+                                p Datos del emprendimiento
+                                .border-bottom.mb-2.mt-2
+                                .row
+                                    .col.m6
+                                        .file-field.input-field.tooltipped(data-position='top' data-tooltip='Las imágenes ingresadas no pueden sobrepasar 1 megabyte.')
+                                            p.mb-1 Logotipo del emprendimiento
+                                            .btn.amber.accent-3.black-text
+                                                span
+                                                    i.material-icons file_upload
+                                                    input(type='file' name='logo' required)#logo
+                                            .file-path-wrapper
+                                                input(type='text' placeholder='Logotipo del emprendimiento').file-path.validate
+                                    .col.m6.mt-3
+                                        p.mb-1 ¿Posee usted delivery?
+                                        select.browser-default(name='delivery' required)#delivery
+                                            option(disabled selected) Elija entre las opciones disponibles
+                                            option(value='1') Si
+                                            option(value='0') No
+                                .input-field.mb-3
+                                    input( name='emprendimiento' type='text' required)#emprendimiento
+                                    label(for='emprendimiento') Titulo de tu emprendimiento
+                                .input-field.mb-3
+                                    textarea(name='descripcion' rows='4' required)#descripcion.materialize-textarea
+                                    label(for='descripcion') Cuentanos sobre tu emprendimiento
+                                #address
+                                    .row
+                                        .col.m4
+                                            label(for='estado') Elija un estado
+                                            select.browser-default(name='estado' required)#estado
+                                        .col.m4
+                                            label(for='direccion') Elija una ciudad
+                                            select.browser-default(name='municipio' required)#municipio
+                                        .col.m4
+                                            .input-field.mb-3
+                                                label(for='direccion') Dirección
+                                                input(type='text' name='direccion' required)#direccion                  
+                                .row
+                                    .col.m12
+                                        .file-field.input-field.tooltipped(data-position='top' data-tooltip='Las imágenes ingresadas no pueden sobrepasar 1 megabyte. Y la resolución máxima debe ser 1500x500. Máximo 6 imágenes.')
+                                            p.mb-1 Imágenes del emprendimiento 
+                                                span.f-0.purple-text.text-bold (Opcional)
+                                            .btn.amber.accent-3.black-text
+                                                span
+                                                    i.material-icons file_upload
+                                                    input(type='file' name='images' multiple)#images
+                                            .file-path-wrapper
+                                                input(type='text' placeholder='Imágenes del emprendimiento').file-path.validate
+                                .row
+                                    .col.m6
+                                        p.mb-1 Red Social 
+                                            span.f-0.purple-text.text-bold (Opcional)
+                                            select.browser-default(name='redesSociales')#redesSocial
+                                                option(selected disabled) Elija la red social que desea mostrar
+                                                option(value='facebook') Facebook
+                                                option(value='twitter') Twitter
+                                                option(value='instagram') Instagram
+                                            
+                                    .col.m6
+                                        .input-field.mb-3
+                                            p Indique el nombre de la red social 
+                                                span.size-micro.text-bold (Opcional)
+                                            input(type='text' name='url' placeholder='Indique el nombre de la red social')#url
+                                .mb-3.center-align
+                                    button(type='submit').btn.purple.accent-4 Enviar solicitud 
+            .col.m4
+                .card
+                    .card-content.center-align
+                        p.f-1 Horario de Atención
+                        .divider.mt-2.mb-2
+                        p.text-bold +58 412 0135725
+                        p.text-bold rubikate2020@gmail.com
+                        .divider.mt-2.mb-2
+                        p Lunes a viernes 9:00 am a 4:00 pm
+                .z-depth-1
+                    video.responsive-video(controls autoplay)
+                        source(src='/video/movie.mov' type='video/mp4')
+        
+                                
+                                
+                                    
+                                    
+
+
+                                

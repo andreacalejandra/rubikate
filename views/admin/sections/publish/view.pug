@@ -1,0 +1,68 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header
+        h1 #{section}
+    .form__layout
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Datos del usuario
+            .card-body
+                .row
+                    .col-md
+                        each u in user
+                            p.text-bold.mb-3 Nombre completo: 
+                                span.text-normal=u.nombre + ' ' + u.apellido
+                            p.text-bold.mb-3 Correo electrónico: 
+                                span.text-normal=u.correo
+                            p.text-bold.mb-3 DNI: 
+                                span.text-normal=u.cedula
+                            p.text-bold.mb-3 Teléfono: 
+                                span.text-normal=u.telefono
+                    .col-md
+                        p.text-bold.mb-3 Plan seleccionado: 
+                            span.text-normal=plan       
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Datos del emprendimiento
+            .card-body    
+                each e in rows_e
+                    .row
+                        .col-md-3.text-center
+                            p.text-bold Logotipo enviado
+                            img(src=e.logo).img-border.bs-1
+                        .col-md-9
+                            p.text-bold Delivery: 
+                                span.text-normal=e.delivery === 1 ? 'Si' : 'No'
+                            p.text-bold Red Social seleccionada: 
+                                span.text-normal.text-capitalize=e.redesSociales 
+                            p.text-bold URI de la red social: 
+                                span.text-normal=e.urlRedesSociales
+                            each c in rows_c
+                                p.text-bold Dirección: 
+                                    span.text-normal=e.direccion + ', ' + c.ciudad + '. ' + c.estado
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Imagenes del emprendimiento
+            .card-body 
+                #carousel-admin
+                    each f in photos
+                        if (f.foto1)
+                            .slide-content
+                                img(src=f.foto1)
+                        if (f.foto2)
+                            .slide-content
+                                img(src=f.foto2)
+                        if (f.foto3)
+                            .slide-content
+                                img(src=f.foto3)
+                        if (f.foto4)
+                            .slide-content
+                                img(src=f.foto4)
+                        if (f.foto5)
+                            .slide-content
+                                img(src=f.foto5)
+                        if (f.foto6)
+                            .slide-content
+                                img(src=f.foto6)
+    a(href='/admin').button__back Volver al inicio

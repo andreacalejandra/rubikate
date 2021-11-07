@@ -1,0 +1,73 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header
+        h1 #{section}
+    .form__layout
+        if (result) 
+            form(action='/admin/publish/upd' method='post')
+                input(type='hidden' value=result.idemprendimiento name='id')
+                input(type='hidden' value=result.idusuario name='uid')
+                .form.mb-3
+                    input(type='text' name='emprendimiento' value=result.emprendimiento placeholder='Nombre del emprendimiento' required)
+                    label(for='emprendimiento') Nombre del emprendimiento
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' name='telefono' value=result.telefono placeholder='Número del emprendimiento' required)
+                            label(for='telefono') Teléfono
+                    .col-md
+                        .form.mb-3
+                            input(type='text' name='correo' value=result.correo placeholder='Correo electrónico del emprendimiento' required)
+                            label(for='correo') Correo electrónico
+                    .col-md
+                        .form.mb-3
+                            select(name='delivery' required)
+                                option(disabled selected) Seleccione
+                                option(value='1') Si
+                                option(value='0') No
+                            label(for='Delivery') Delivery
+                .form.mb-3
+                    input(type='text' name='coordenadas' value=result.coordenadas placeholder='Coordenadas del emprendimiento')
+                    label(for='coordenadas') Coordenadas del emprendimiento
+                .border-bottom.mt-2.mb-3
+                .text-center
+                    p Red social actual
+                    a.text-purple(href=result.urlRedesSociales)= result.urlRedesSociales
+                .border-bottom.mt-2.mb-3
+                .row
+                    .col-md
+                        .form.mb-3
+                            select(name='redesSociales')
+                                option(value='' selected= (result.redesSociales === '' ? true : false)) Ninguno
+                                option(value='instagram' selected=(result.redesSociales == 'instagram' ? true : false)) Instagram
+                                option(value='twitter' selected=(result.redesSociales == 'twitter' ? true : false)) Twitter
+                                option(value='facebook' selected=(result.redesSociales == 'facebook' ? true : false)) Facebook                                
+                            label(for='redesSociales') Red social
+                    .col-md
+                        .form.mb-3
+                            input(type='text' name='urlRedesSociales' placeholder='URL de la red social')
+                            label(for='urlRedesSociales') URL de la red social
+                .form.mb-3
+                    input(type='text' name='direccion' value=result.direccion placeholder='Dirección del direccion' required)
+                    label(for='direccion') Dirección del emprendimiento
+                .row
+                    .col-md
+                        .form.mb-3
+                            select(name='sitioWeb')
+                                option(disabled selected) Seleccione
+                                option(value='1') Si
+                                option(value='0') No
+                            label(for='emprendimiento') Katalogo del emprendimiento
+                    .col-md
+                        .form.mb-3
+                            input(type='text' value=result.nombreUrl name='nombreUrl')
+                            label(for='emprendimiento') URL katalogo
+                .text-center
+                    button(type='submit').button-hovered.purple_custom.text-white Guardar
+    a(href='/admin').button__back Volver al inicio
+    script.
+        var editor = new FroalaEditor('#descripcion', {
+            language: 'es'
+        })        
+                

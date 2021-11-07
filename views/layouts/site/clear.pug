@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    title #{title} | #{section}
+    // ICON CSS CDN
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+    link(href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet')
+    // CUSTOM CSS
+    link(rel='stylesheet' href='/css/custom/owner.min.css')
+    // CSS FRAMEWORK
+    link(rel='stylesheet' href='/css/vendor/materialize.min.css')
+
+    script(src='/js/vendor/jquery/jquery-3.6.0.min.js')
+
+  body(data-barba="wrapper")
+    ul.transition
+      li
+      li
+      li
+      li
+      li
+    main(data-barba="container", data-barba-namespace="home")
+      include ../../inc/site/up
+      block content
+    // VENDORS JS
+    script(src='/js/vendor/materialize.min.js')
+
+    
+
+

@@ -1,0 +1,159 @@
+.nav__menu(style='z-index:9999;')
+  .container
+    nav.nav__menu-left.animate-left
+      ul
+        li
+          a(href="/admin/panel")
+            i.material-icons dashboard 
+            p Panel
+        li
+          a(href="/admin/plan")
+            i.material-icons assignment 
+            p Planes
+        li
+          a(href="/admin/publish")
+            i.material-icons ads_click 
+            p Publikate
+        li
+          a(href="/admin/site")
+            i.material-icons window 
+            p Sitio
+        li
+          a(href="/admin/ally")
+            i.material-icons face 
+            p Aliados
+        li
+          a(href='/admin/carousel')
+            i.material-icons view_carousel
+            p Carrusel
+        if (user.rol === 0)
+          li
+            a(href='/admin/notify')
+              i.material-icons notification_important
+              p Notificaciones
+        li
+          a(href='/admin/user')
+            i.material-icons people
+            p Administradores
+  .wrapper-nav__menu
+    header
+      .container-fluid
+        .row
+          .col-md-6.start-md
+            h2.text-uppercase.text-bold
+              | Menu
+              
+          .col-md-6.end-md
+            button#close_menu
+              i.material-icons
+                | close
+                
+    main
+      .container-fluid.text-center.mb-3.animate-in
+        h1.text-bold Bienvenido de nuevo, #{user.usuario}
+        p ¿Que desea realizar el dia de hoy?
+      .row.text-center
+        .col-md-6.animate-down
+          .item-nav
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver planes")
+              .content
+                a(href="/admin/plan")
+                  i.material-icons fact_check 
+                  p Planes
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver Panel")
+              .content
+                a(href="/admin/panel")
+                  i.material-icons view_list 
+                  p Panel
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver estadisticas")
+              .content
+                a(href="/admin/stats")
+                  i.material-icons analytics 
+                  p Estadisticas
+          .item-nav
+            .tooltip-top.tooltip-mobile.child.__large-extra(data-tooltip="Agregar nuevo plan")
+              .content
+                a(href="/admin/plan/add")
+                  i.material-icons analytics 
+                  p Nuevo plan
+            .tooltip-top.tooltip-mobile.child.__large(data-tooltip="Modificar plan existente")
+              .content
+                a(href="/admin/plan")
+                  i.material-icons analytics 
+                  p Modificar plan
+          .item-nav
+            if (user.rol === 0)
+              .tooltip-top.tooltip-mobile.child.__large(data-tooltip="Ver panel de notificaciones")
+                .content
+                  a(href="/admin/notify")
+                    i.material-icons privacy_tip 
+                    p Notificaciones
+            .tooltip-top.tooltip-mobile.child.__large(data-tooltip="Ver publicidades")
+              .content
+                a(href="/admin/publish")
+                  i.material-icons ads_click 
+                  p Publikate
+          .item-nav
+            .tooltip-top.tooltip-mobile.child.__large-extra(data-tooltip="Agregar nuevo administrador")
+              .content
+                a(href="/admin/user/create")
+                  i.material-icons person_add 
+                  p Agregar administrador
+        .col-md-6.animate-down
+          .item-nav
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver estados")
+              .content
+                a(href="/admin/state")
+                  i.material-icons holiday_village 
+                  p Estados
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver ciudades")
+              .content
+                a(href="/admin/city")
+                  i.material-icons location_city 
+                  p Ciudades
+            .tooltip-top.tooltip-mobile.child.__large-extra(data-tooltip="Ver información del sitio")
+              .content
+                a(href="/admin/site")
+                  i.material-icons settings_applications 
+                  p Información sitio
+          .item-nav
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver categorías")
+              .content
+                a(href="/admin/category")
+                  i.material-icons category 
+                  p Categorías
+            .tooltip-top.tooltip-mobile.child.__large-extra(data-tooltip="Modificar categoría")
+              .content
+                a(href="/admin/category")
+                  i.material-icons mode_edit 
+                  p Modificar categoría
+            .tooltip-top.tooltip-mobile.child(data-tooltip="Ver carrusel de imágenes")
+              .content
+                a(href="/admin/carousel")
+                  i.material-icons image 
+                  p Carrusel
+          .item-nav
+            .tooltip-top.tooltip-mobile.child.__full(data-tooltip="Eliminar plan")
+              .content
+                a(href="/admin/plan")
+                  i.material-icons delete 
+                  p Eliminar plan
+          .item-nav
+            .tooltip-top.tooltip-mobile.child.__large-extra(data-tooltip="Agregar ciudad")
+              .content
+                a(href="/admin/city/add")
+                  i.material-icons add 
+                  p Agregar ciudad
+            .tooltip-top.tooltip-mobile.child.__large-extra(data-tooltip="Agregar estado")
+              .content
+                a(href="/admin/state/add")
+                  i.material-icons queue 
+                  p Agregar estado
+.top__nav
+  li
+      a(href="/auth/logout")
+          i.material-icons logout 
+          | Salir de la cuenta
+
+  li.right
+      #time.text-bold

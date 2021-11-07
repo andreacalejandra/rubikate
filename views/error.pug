@@ -1,0 +1,20 @@
+extends layouts/error
+
+block content
+  .its__done
+      .container
+          .card.has-rounded-md.bs-1
+              .card-body
+                i.bi.bi-check-circle.text-success.size-extra-xl
+                if (status === 404)
+                    h1
+                        i.bx.bx-error.yellow-text.text-darken-3
+                    p.f-3.text-bold Error #{status}
+                    p La página web a la que esta intentando acceder no existe o es invalida, por favor verifique.
+                else
+                    h1
+                        i.bx.bx-block.f-4.text-red
+                    p.f-3.text-bold Error #{status}
+                    p Ha ocurrido un error por favor póngase en contacto con el administrador del sitio.
+          .center-align
+              a(href='/').black-text Volver al inicio

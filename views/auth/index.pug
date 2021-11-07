@@ -1,0 +1,22 @@
+extends ../layouts/admin/auth
+
+block content
+    .container-fluid
+        section.auth__content.animate-left-ease
+            .row
+                .col-md
+                    .auth_icon.has-glass-md
+                        h1 #{section}
+            .card
+                .card-body
+                    form(action='/auth/login' method='POST' autocomplete='off')#login-form
+                        .mb-3.form-glass
+                            input(type='text' placeholder='Ingrese su usuario' name='username')#username
+                        .mb-3.form-glass
+                            input(type='password' placeholder='Ingrese su contraseña' name='password')#password
+                        .mb-3.text-center
+                            button(type='submit').button.button-glass.bordered-white.has-shadow-sm Ingresar
+                    .text-center
+                        a(href='/auth/forgot').text-white ¿He olvidado la contraseña?
+    script.
+        $('#login-form').disableAutoFill();

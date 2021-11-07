@@ -1,0 +1,33 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (result.length)
+            table.table
+                thead
+                    tr
+                        th Nombre
+                        th Fecha de creación
+                        th Acciones
+                tbody
+                    each res in result
+                        tr
+                            td= res.nombre
+                            td= res.created_at.toISOString().substr(0, 10)
+                            td.has-row.is-centered
+                                a(href='/admin/plan/upd/' + res.idplan).button-hovered.button.not-rounded.purple_custom.text-white
+                                    | Actualizar
+                                form(action='/admin/plan/delete/' + res.idplan + '?_method=DELETE' method='POST')
+                                    input(type='hidden' name='_method' value='DELETE')
+                                    button(type='submit').button.not-rounded.button-hovered.red_custom.text-white
+                                        | Borrar
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No posee ningun plan creado.
+            .border-bottom.mt-5.mb-2
+        if (user.rol === 0)
+            .text-center
+                a(href='/admin/plan/add').button-hovered.purple_custom.text-white Agregar plan
+    a(href='/admin').button__back Volver al inicio

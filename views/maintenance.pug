@@ -1,0 +1,63 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    meta(http-equiv="content-language" content='es-VE, en')   
+
+    title #{title} | #{section}
+    // ICON CSS CDN
+    link(href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet')
+    // CUSTOM CSS
+    link(rel='stylesheet' href='/css/custom/owner.min.css')
+    // CSS FRAMEWORK
+    link(rel='stylesheet' href='/css/vendor/materialize.min.css')
+    style.
+        body {
+            animation: background 10s ease infinite;
+            width: 100%;
+            background: linear-gradient(45deg, #ffab00, #7b1fa2);
+            background-size: 300% 300%;
+            background-color: #ffc107;
+        }
+
+        @keyframes background {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        main {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 100%;
+        }
+
+        .divider {
+            background: rgba(0,0,0,0.1)
+        }
+  body
+    main.center
+        .container
+            img(src='/img/site/footer_logo_h.png' alt='Logo' width='180px')
+            .divider
+            h5.white-text.mb-5 Innovando nuestra imagen
+            a(href='https://www.instagram.com/rubikate2020/' data-position='bottom' data-tooltip='Siguenos').tooltipped.pink.accent-3.btn-floating.btn-large.black.pulse
+                i.bx.bxl-instagram
+  script(type="text/javascript" src='/js/vendor/jquery/jquery-3.6.0.min.js')
+  script(src='/js/vendor/materialize.min.js')
+  script.
+    $(document).ready(function(){
+        $('.tooltipped').tooltip();
+    });
+    

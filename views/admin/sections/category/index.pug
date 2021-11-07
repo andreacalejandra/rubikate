@@ -1,0 +1,60 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (categories.length > 0)
+            h2.text-center Categorías principales
+            .border-bottom.mb-3.mt-3
+            table.table.table-bordered.table-hovered
+                thead.white
+                    tr
+                        th Nombre
+                        th Fecha de creación
+                        th Acciones
+                tbody
+                    each c in categories
+                        if (c.idpadre === 0)
+                            tr
+                                td=c.nombre
+                                td=c.created_at.toISOString().substr(0, 10)
+                                td.has-row.is-centered
+                                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/category/upd/" + c.idcategoria)           
+                                        | Actualizar
+                                    form(action='/admin/category/delete/' + c.idcategoria + '?_method=DELETE' method="post")
+                                        input(type='hidden' name='_method' value='DELETE')
+                                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No existe ninguna categoría principal registrada.
+            .border-bottom.mt-5.mb-2
+        if (categories.length > 0)
+            h2.text-center Subcategorías
+            .border-bottom.mb-3.mt-3
+            table.table.table-bordered.table-hovered
+                thead.white
+                    tr
+                        th Nombre
+                        th Fecha de creación
+                        th Acciones
+                tbody
+                    each s in categories
+                        if (s.idpadre > 0)
+                            tr
+                                td=s.nombre
+                                td=s.created_at.toISOString().substr(0, 10)
+                                td.has-row.is-centered
+                                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/category/upd/" + s.idcategoria)           
+                                        | Actualizar
+                                    form(action='/admin/category/delete/' + s.idcategoria + '?_method=DELETE' method="post")
+                                        input(type='hidden' name='_method' value='DELETE')
+                                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No existe ninguna categoría registrada.
+            .border-bottom.mt-5.mb-2
+        if (user.rol === 0)
+            .text-center
+                a(href='/admin/category/add').button-hovered.purple_custom.text-white Agregar categoría
+    a(href='/admin').button__back Volver al inicio

@@ -1,0 +1,53 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header
+        h1 #{section}
+    .form__layout
+        if (site.length > 0)
+            p.mb-5.text-center La información a mostrar actualmente en el sitio es la siguiente, recuerde que puede modificarla siempre con el boton correspondiente.
+            each res in site
+                .row
+                    .col-md
+                        p.text-bold Dirección: 
+                            span.text-normal= res.direccion
+                    .col-md
+                        p.text-bold Teléfono de contacto: 
+                            span.text-normal= res.telefono
+                .row
+                    .col-md
+                        p.text-bold Correo electrónico: 
+                            span.text-normal= res.correo
+                    .col-md
+                        p.text-bold Facebook: 
+                            span.text-normal= res.facebook
+                .row
+                    .col-md
+                        p.text-bold Instagram: 
+                            span.text-normal= res.instagram
+                    .col-md
+                        p.text-bold Twitter: 
+                            span.text-normal= res.twitter
+                .row
+                    .col-md
+                        p.text-bold Telegram número:
+                            span.text-normal= res.telegram
+                    .col-md
+                        p.text-bold Whatsapp número:
+                            span.text-normal= res.whatsapp
+                .text-center.mb-3.mt-3
+                    a.button-hovered.purple_custom.text-white(href='/admin/site/upd/' + res.idsitio) Cambiar información
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No se ha configurado la información del sitio web.
+            .border-bottom.mt-5.mb-2
+            .text-center.mb-3
+                a.button-hovered.orange_custom.text-white(href='/admin/site/add') Agregar información 
+    a(href='/admin').button__back Volver al inicio
+
+
+            
+    
+
+    
+

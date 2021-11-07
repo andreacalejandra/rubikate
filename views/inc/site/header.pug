@@ -1,0 +1,5 @@
+#carousel-header.carousel.carousel-slider.animate-left-ease
+    each img in carrusel
+        if (img.status === 1) 
+            .carousel-item
+                img.img-item(src=img.imagen).responsive-img

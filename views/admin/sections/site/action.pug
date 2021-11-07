@@ -1,0 +1,86 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (result)
+            form(method='post' action='/admin/site/upd')
+                input(type='hidden' value=result.idsitio name='id')
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la dirección' value=result.direccion name='direccion' required)#direccion
+                            label(for='direccion') Ingrese la dirección
+                    .col-md
+                        .form.mb-3
+                            input(type='number' min='0' placeholder='Ingrese el teléfono' value=result.telefono name='telefono' required)#telefono
+                            label(for='telefono') Ingrese el teléfono
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese el correo electrónico' value=result.correo name='correo' required)#correo
+                            label(for='correo') Ingrese el correo electrónico
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la URI de facebook' value=result.facebook name='facebook' required)#facebook
+                            label(for='facebook') Ingrese la URI de facebook
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la URI de instagram' value=result.instagram name='instagram' required)#instagram
+                            label(for='instagram') Ingrese la URI de instagram
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la URI de twitter' value=result.twitter name='twitter' required)#twitter
+                            label(for='twitter') Ingrese la URI de twitter
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='number' min='0' placeholder='Ingrese el número de Telegram' name='telegram' value=result.telegram required)#telegram
+                            label(for='telegram') Ingrese el número de Telegram
+                    .col-md
+                        .form.mb-3
+                            input(type='number' min='0' placeholder='Ingrese el número de Whatsapp' name='whatsapp' value=result.whatsapp required)#whatsapp
+                            label(for='whatsapp') Ingrese el número de Whatsapp
+                .text-center.mb-3
+                    button(type='submit').button-hovered.purple_custom.text-white Actualizar
+        else
+            form(method='post' action='/admin/site/add')
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la dirección' name='direccion' required)#direccion
+                            label(for='direccion') Ingrese la dirección
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese el teléfono' name='telefono' required)#telefono
+                            label(for='telefono') Ingrese el teléfono
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese el correo electrónico' name='correo' required)#correo
+                            label(for='correo') Ingrese el correo electrónico
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la URI de facebook' name='facebook' required)#facebook
+                            label(for='facebook') Ingrese la URI de facebook
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la URI de instagram' name='instagram' required)#instagram
+                            label(for='instagram') Ingrese la URI de instagram
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Ingrese la URI de twitter' name='twitter' required)#twitter
+                            label(for='twitter') Ingrese la URI de twitter
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='number' min='0' placeholder='Ingrese el número de Telegram' name='telegram' required)#telegram
+                            label(for='telegram') Ingrese el número de Telegram
+                    .col-md
+                        .form.mb-3
+                            input(type='number' min='0' placeholder='Ingrese el número de Whatsapp' name='whatsapp' required)#whatsapp
+                            label(for='whatsapp') Ingrese el número de Whatsapp
+                .text-center.mb-3
+                    button(type='submit').button-hovered.purple_custom.text-white Guardar
+    a(href='/admin').button__back Volver al inicio

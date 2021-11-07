@@ -1,0 +1,126 @@
+extends ../layouts/admin/index
+
+block content
+    .container-fluid.mt-5.animate_down
+            .row
+                .icon-menu
+                    .col-md
+                        if (users.length > 5)
+                            li
+                                a(href="/admin/user/")
+                                    i.material-icons admin_panel_settings 
+                                    p Administradores
+                        else
+                            li#window_open(data-window="window_admin")
+                                a(href="#")
+                                    i.material-icons admin_panel_settings 
+                                    p Administradores
+                                    
+                    .col-md
+                        li
+                            a(href="/admin/panel")
+                                i.material-icons table_chart 
+                                p Panel
+                    .col-md
+                        li#window_open(data-window="window_site")
+                            a(href="#")
+                                i.material-icons web 
+                                p Sitio
+            .row
+                .icon-menu
+                    .col-md
+                        if (categories.length > 5)
+                            li
+                                a(href="/admin/category")
+                                    i.material-icons category 
+                                    p Categorías
+                        else
+                            li#window_open(data-window='window_category')
+                                a(href="/admin/category")
+                                    i.material-icons category 
+                                    p Categorías
+                    .col-md
+                        if (plans.length > 5)
+                            li
+                                a(href="/admin/plan")
+                                    i.material-icons fact_check 
+                                    p Planes
+                        else 
+                            li#window_open(data-window="window_plan")
+                                a(href="#")
+                                    i.material-icons fact_check 
+                                    p Planes
+                    .col-md
+                        if (sliders.length > 5)
+                            li
+                                a(href="/admin/carousel")
+                                    i.material-icons image 
+                                    p Carrusel
+                        else
+                            li#window_open(data-window="window_carousel")
+                                a(href="#")
+                                    i.material-icons image 
+                                    p Carrusel
+            .row
+                .icon-menu
+                    .col-md
+                        if (allies.length > 5)
+                            li
+                                a(href="/admin/ally")
+                                    i.material-icons people 
+                                    p Aliados
+                        else
+                            li#window_open(data-window="window_ally")
+                                a(href="#")
+                                    i.material-icons people 
+                                    p Aliados
+                    .col-md
+                        if (cities.length > 5)
+                            li
+                                a(href="/admin/city")
+                                    i.material-icons location_city 
+                                    p Administrar ciudades
+                        else
+                            li#window_open(data-window="window_city")
+                                a(href="#")
+                                    i.material-icons location_city 
+                                    p Administrar ciudades
+                    .col-md
+                        if (states.length > 5)
+                            li
+                                a(href="/admin/state")
+                                    i.material-icons holiday_village 
+                                    p Administrar estados
+                        
+                        else
+                            li#window_open(data-window="window_state")
+                                a(href="#")
+                                    i.material-icons holiday_village 
+                                    p Administrar estados
+            .row
+                .icon-menu
+                    .col-md
+                        if (publishs.length > 5)
+                            li
+                                a(href="/admin/publish")
+                                    i.material-icons ads_click 
+                                    p Publikate
+                        else
+                            li#window_open(data-window="window_publish")
+                                a(href="#")
+                                    i.material-icons ads_click 
+                                    p Publikate
+                    .col-md
+                        li.disabled
+                            a
+                                i.material-icons store 
+                                p Katalogos
+            if (user.rol == 0)
+                .row
+                    .icon-menu
+                        .col-md
+                            li
+                                a(href="/admin/notify")
+                                    i.material-icons notifications_active
+                                    p Notificaciones
+    include ../inc/admin/windows

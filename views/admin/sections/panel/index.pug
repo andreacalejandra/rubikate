@@ -1,0 +1,32 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header
+        h1 #{section}
+    .form__layout
+        if (result.length > 0)
+            table.table.table-bordered.table-hovered
+                thead.white
+                    tr
+                        th Estado
+                        th Nombre del Emprendimiento
+                        th Fecha
+                        th Acción
+                tbody
+                    each res in result
+                        tr
+                        if (res.status === 3)
+                            td.text-amber.text-bold Pendiente 
+                            td=res.emprendimiento
+                            td=res.created_at.toISOString().substr(0, 10)
+                            td
+                                a(href='/admin/panel/view/' + res.idemprendimiento).button.not-rounded.button-hovered.primary.tooltip-top.text-white
+                                    | Visualizar
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No existe ningún emprendimiento por revisar.
+            .border-bottom.mt-5.mb-2
+    a(href='/admin').button__back Volver al inicio
+
+
+                        

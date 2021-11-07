@@ -1,0 +1,43 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        h4.mb-3.mt-2 Todos los campos son requeridos.
+        if (result)        
+            form(action='/admin/plan/upd/' method='post')
+                input(type='hidden' value=result.idplan name='id')
+                .form.mb-3
+                    input(type='text' name='nombre' placeholder='Nombre del plan' value=result.nombre required)#nombre
+                    label(for='nombre') Nombre del plan
+                .form.mb-3
+                    textarea(name='descripcion' rows='8' required)#descripcion !{result.descripcion}
+                .form.mb-3
+                    input(type='number' name='costo' placeholder='Costo del plan' min='0' value=result.costo required)#costo
+                    label(for='costo') Costo del plan
+                .form.mb-3
+                    input(type='number' name='duracion' placeholder='Duración del plan' value=result.duracion required)#duracion
+                    label(for='duracion') Duración del plan
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Actualizar
+        else
+            form(action='/admin/plan/add/' method='post')
+                .form.mb-3
+                    input(type='text' name='nombre' placeholder='Nombre del plan' required)#nombre
+                    label(for='nombre') Nombre del plan
+                .form.mb-3
+                    textarea(name='descripcion' rows='1')#descripcion
+                .form.mb-3
+                    input(type='number' name='costo' placeholder='Costo del plan' min='0' required)#costo
+                    label(for='costo') Costo del plan
+                .form.mb-3
+                    input(type='number' name='duracion' placeholder='Duración del plan' required)#duracion
+                    label(for='duracion') Duración del plan
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Guardar
+    a(href='/admin').button__back Volver al inicio
+    script.
+        var editor = new FroalaEditor('#descripcion', {
+            language: 'es'
+        })

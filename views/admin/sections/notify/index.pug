@@ -1,0 +1,21 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        table.table.table-bordered.table-hovered
+            thead.white
+                tr
+                    th Administrador
+                    th Acción
+                    th Tabla manipulada
+                    th Fecha
+            tbody
+                each n in notifys
+                    tr
+                        td=n.usuario
+                        td=n.Accion
+                        td=n.tabla
+                        td=n.created_at.toISOString().substr(0, 19)
+    a(href='/admin').button__back Volver al inicio

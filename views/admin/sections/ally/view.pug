@@ -1,0 +1,25 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        .container-fluid
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Datos del Aliado
+            .card-body
+                .row
+                    .col-md.text-center
+                        p.text-bold Nombre del aliado:
+                            span.text-normal= result.nombre
+                    .col-md.text-center
+                        p.text-bold Correo del aliado:
+                            span.text-normal= result.correo
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Logo del aliado
+            .card-body
+                .is-centered.has-column.mt-5
+                    img(src=result.logo alt='logo_aliado').img-border
+    a(href='/admin').button__back Volver al inicio

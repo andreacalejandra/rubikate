@@ -1,0 +1,22 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (result)
+            form(method='post' action='/admin/state/upd')
+                input(type='hidden' value=result.idestado name='id')
+                .form.mb-3
+                    input(type='text' placeholder='Ingrese el nombre del estado' name='estado' value=result.estado required)#estado
+                    label(for='estado') Ingrese el nombre del estado
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Actualizar
+        else
+            form(method='post' action='/admin/state/add')
+                .form.mb-3
+                    input(type='text' placeholder='Ingrese el nombre del estado' name='estado' required)#estado
+                    label(for='estado') Ingrese el nombre del estado
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Registrar
+    a(href='/admin').button__back Volver al inicio

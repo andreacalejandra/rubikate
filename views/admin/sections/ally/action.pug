@@ -1,0 +1,38 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (result)
+            .is-centered.text-center.has-column
+                img(src=result.logo alt='logo').img-border.has-rounded-lg
+                p Imagen actual
+            .border-bottom.mt-1.mb-1
+            p Todos los campos son requeridos
+            form(action='/admin/ally/upd' method='post' enctype="multipart/form-data")
+                input(type='hidden' value=result.idaliado name='id')
+                .form.mb-3
+                    input(type='text' name='nombre' placeholder='Nombre del aliado' value=result.nombre required)#nombre
+                    label(for='nombre') Nombre del aliado
+                .form.mb-3
+                    input(type='email' name='correo' placeholder='Correo del aliado' value=result.correo required)#correo
+                    label(for='correo') Correo electrónico del aliado
+                .form-simple.mb-3
+                    input(type='file' name='logo' value=result.logo required)#logo
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Actualizar
+        else
+            p Todos los campos son requeridos
+            form(action='/admin/ally/add' method='post' enctype="multipart/form-data")
+                .form.mb-3
+                    input(type='text' name='nombre' placeholder='Nombre del aliado' required)#nombre
+                    label(for='nombre') Nombre del aliado
+                .form.mb-3
+                    input(type='email' name='correo' placeholder='Correo del aliado' required)#correo
+                    label(for='correo') Correo electrónico del aliado
+                .form-simple.mb-3
+                    input(type='file' name='logo' required)#logo
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Guardar
+    a(href='/admin').button__back Volver al inicio

@@ -1,0 +1,32 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (allies.length > 0)
+            table.table.table-bordered.table-hover.mt-3
+                thead.white
+                    tr
+                        th Nombre
+                        th Fecha de creación
+                        th Acciones
+                tbody
+                    each a in allies
+                        tr
+                            td= a.nombre
+                            td= a.created_at.toISOString().substr(0, 10)
+                            td.has-row.is-centered
+                                a(href='/admin/ally/view/' + a.idaliado).button-hovered.primary.button.text-white.not-rounded.size-sm
+                                    | Visualizar
+                                form(action='/admin/carousel/delete/' + a.idaliado + '?_method=DELETE', method='POST')
+                                    input(type='hidden' name='_method' value='DELETE')
+                                    button(type='submit').button-hovered.purple.size-sm
+                                        | Borrar
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No existe ningun aliado registrado.
+            .border-bottom.mt-5.mb-2
+        .text-center
+            a(href='/admin/ally/add/').button-hovered.purple_custom.text-white Agregar aliado
+    a(href='/admin').button__back Volver al inicio

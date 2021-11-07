@@ -1,0 +1,113 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header
+        h1 #{section}
+    .form__layout
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Datos del usuario
+            .card-body
+                .row
+                    .col-md
+                        each u in user
+                            p.text-bold.mb-3 Nombre completo: 
+                                span.text-normal=u.nombre + ' ' + u.apellido
+                            p.text-bold.mb-3 Correo electrónico: 
+                                span.text-normal=u.correo
+                            p.text-bold.mb-3 DNI: 
+                                span.text-normal=u.cedula
+                            p.text-bold.mb-3 Teléfono: 
+                                span.text-normal=u.telefono
+                    .col-md
+                        p.text-bold.mb-3 Plan seleccionado: 
+                            span.text-normal=plan
+                    .border-bottom.mb-3
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                h4.text-bold Datos del emprendimiento
+            .card-body
+                each e in rows_e
+                    .row
+                        .col-md-3.text-center
+                            p.text-bold Logotipo enviado            
+                            img(src=e.logo).img-border.bs-1
+                        .col-md-9
+                            p.text-bold Delivery: 
+                                span.text-normal=e.delivery === 1 ? 'Si' : 'No'
+                            p.text-bold Red Social seleccionada: 
+                                span.text-normal.text-capitalize=e.redesSociales 
+                            p.text-bold URI de la red social: 
+                                span.text-normal=e.urlRedesSociales
+                            p.text-bold Dirección: 
+                                each c in rows_c
+                                    span.text-normal=e.direccion + ', ' + c.ciudad + '. ' + c.estado
+        .border-bottom.mb-3.mt-3
+        .card.mb-3.bs-1.has-rounded-md
+            .card-header
+                    h4.text-bold Imagenes del emprendimiento
+            .card-body
+                .row
+                    .col-md
+                        #carousel-admin
+                            each f in photos
+                                if (f.foto1)
+                                    .slide-admin
+                                        img(src=f.foto1 alt='carousel_one')
+                                if (f.foto2)
+                                    .slide-admin
+                                        img(src=f.foto2 alt='carousel_two')
+                                if (f.foto3)
+                                    .slide-admin
+                                        img(src=f.foto3 alt='carousel_three')
+                                if (f.foto4)
+                                    .slide-admin
+                                        img(src=f.foto4 alt='carousel_four')
+                                if (f.foto5)
+                                    .slide-admin
+                                        img(src=f.foto5 alt='carousel_five')
+                                if (f.foto6)
+                                    .slide-admin
+                                        img(src=f.foto6 alt='carousel_six')
+                .card.mb-3.bs-1.has-rounded-md
+                    .card-header
+                        h4.text-bold.text-center Acciones disponibles
+                    .card-body
+                        .text-center
+                            p.mb-4 Indique que desea realizar con dicha solicitud
+                            .form-check.form-check-inline
+                                input(type='radio' name='option' value='1')#disable.form-check-input
+                                label(for='disable').form-check-label Aceptar
+                            .form-check.form-check-inline
+                                input(type='radio' name='option' value='0')#enable.form-check-input
+                                label(for='enable').form-check-label Denegar
+                        #form_one.mt-3
+                            p Seleccione que categoría poseerá la publicidad.
+                            .border-bottom.mb-3.mt-3
+                            form(action='/admin/panel/enable' method='POST')
+                                each p in rows_p
+                                    input(type='hidden' value=p.idpublicacion name='idpublicacion')
+                                    input(type='hidden' value=p.idplan name='idplan')
+                                each e in rows_e
+                                    input(type='hidden' value=e.idemprendimiento name='idemprendimiento')
+                                .form.mb-3
+                                    select(name='categories')#categories
+                                        option(selected) Elija la categoria
+                                            each category in categories
+                                                if (category.idpadre > 0)
+                                                    option(value=category.idcategoria)=category.nombre
+                                    label(for='categories') Seleccione una categoria para el emprendimiento
+                                .mb-3.text-center
+                                    button(type='submit').button-bordered.bordered-success Finalizar
+                        #form_two.mb-3.mt-3
+                            .border-bottom.mb-3.mt-3
+                            form(action='/admin/panel/disable' method='POST')
+                                each p in rows_p
+                                    input(type='hidden' value=p.idpublicacion name='idpublicacion')
+                                each e in rows_e
+                                    input(type='hidden' value=e.idemprendimiento name='idemprendimiento')
+                                .form.mb-3
+                                    textarea(name='observacion' rows='8')#observacion
+                                    label(for='observacion') Ingrese las observaciones
+                                .mb-3.text-center
+                                    button(type='submit').button-bordered.bordered-danger Finalizar

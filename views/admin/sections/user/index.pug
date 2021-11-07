@@ -1,0 +1,30 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (users.length > 0)
+            table.table.table-bordered.table-hovered
+                thead.white
+                    tr
+                        th Administrador
+                        th Rol
+                        th Fecha de ingreso
+                        th Acciones
+                tbody
+                    each u in users
+                        tr
+                            td=u.usuario
+                            td=u.rol === 0 ? 'Administrador/a' : 'Moderador/a'
+                            td=u.created_at.toISOString().substr(0, 19)
+                            td.has-row.is-centered
+                                a(href='/admin/user/upd/' + u.id).button.not-rounded.button-hovered.primary.text-white Actualizar
+                                form(action='/admin/user/delete/' + u.id + '?_method=DELETE', method='POST')
+                                    input(type='hidden' name='_method' value='DELETE')
+                                    button(type='submit').button-hovered.red.size-sm
+                                        | Borrar
+        else
+        
+        a(href='/admin/carousel/add/').button-hovered.purple_custom.text-white Agregar administrador
+        a(href='/admin').button__back Volver al inicio

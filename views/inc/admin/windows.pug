@@ -1,0 +1,411 @@
+// Admin window
+#window_admin.window.bs-7
+  .window_header
+    h4 Administradores
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Rol
+          th Fecha de ingreso
+          th Acciones
+      tbody
+        each u in users
+            tr
+                td=u.usuario
+                td=u.rol === 0 ? 'Administrador' : 'Moderador'
+                td=u.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/user/upd/" + u.id)           
+                        | Actualizar
+                    form(action='/admin/user/delete/' + u.id + '?_method=DELETE' method="post")
+                        input(type='hidden' name='_method' value='DELETE')
+                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/user/create').button-hovered.orange_custom.text-white Agregar administrador
+// Plan window
+#window_plan.window.bs-7
+  .window_header
+    h4 Planes
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Precio
+          th Duración
+          th Fecha de creación
+          th Acciones
+      tbody
+        each p in plans
+            tr
+                td=p.nombre
+                td=p.costo
+                td=p.duracion
+                td=p.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/plan/upd/" + p.idplan)           
+                        | Actualizar
+                    form(action='/admin/plan/delete/' + p.idplan + '?_method=DELETE' method="post")
+                        input(type='hidden' name='_method' value='DELETE')
+                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/plan/add').button-hovered.not-rounded.orange_custom.text-white Agregar plan
+// Site window
+#window_site.window.bs-7
+  .window_header
+    h4 Sitio
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    if (site)
+        table.table.table-bordered.table-hovered
+            thead.white
+                tr
+                th Dirección
+                th Teléfono
+                th Correo
+                th Facebook
+                th Instagram
+                th Twitter
+                th Whatsapp
+                th Telegram
+                th Acciones
+            tbody
+                
+                    tr
+                        td #{site.direccion}
+                        td #{site.telefono}
+                        td #{site.correo}
+                        td #{site.facebook}
+                        td #{site.instagram}
+                        td #{site.twitter}
+                        td #{site.whatsapp}
+                        td #{site.telegram}
+                        
+                        td.has-row.is-centered
+                            a.button.purple_custom.text-white(href="/admin/site/upd/" + 1)           
+                                | Actualizar
+    else
+        p.text-center.text-italic.mb-3 No se ha agregado información al sitio
+    if (user.rol == 0)
+        a(href='/admin/site/add').button-hovered.not-rounded.orange_custom.text-white Agregar información
+// Panel window
+#window_panel.window.bs-7
+  .window_header
+    h4 Panel
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Estado
+          th Nombre
+          th Fecha de creación
+          th Acciones
+      tbody
+        each p in panels
+            tr
+                td=p.status
+                td=p.emprendimiento
+                td=p.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.purple_custom.text-white(href="/admin/panel/view" + p.idemprendimiento)           
+                        | Visualizar
+// Category window
+#window_category.window.bs-7
+  .window_header
+    h4 Categorías
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Tipo
+          th Nombre
+          th Fecha de creación
+          th Acciones
+      tbody
+        each c in categories
+            tr
+                td=c.idpadre == 0 ? 'Principal' : 'Subcategoría'
+                td=c.nombre
+                td=c.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/category/upd/" + c.idcategoria)           
+                        | Actualizar
+                    form(action='/admin/category/delete/' + c.idcategoria + '?_method=DELETE' method="post")
+                        input(type='hidden' name='_method' value='DELETE')
+                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/category/add').button-hovered.not-rounded.orange_custom.text-white Agregar categoría
+// Allies window
+#window_ally.window.bs-7
+  .window_header
+    h4 Aliados
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Correo
+          th Fecha de ingreso
+          th Acciones
+      tbody
+        each a in allies
+            tr
+                td=a.nombre
+                td=a.correo
+                td=a.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.blue_custom.text-white(href="/admin/ally/view/" + a.idaliado)           
+                        | Visualizar
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/ally/upd/" + a.idaliado)           
+                        | Actualizar
+                    form(action='/admin/ally/delete/' + a.idaliado + '?_method=DELETE' method="post")
+                        input(type='hidden' name='_method' value='DELETE')
+                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/ally/add').button-hovered.button.not-rounded.orange_custom.text-white Agregar aliado
+// City window
+#window_city.window.bs-7
+  .window_header
+    h4 Ciudades
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Fecha de creación
+          th Acciones
+      tbody
+        each c in cities
+            tr
+                td=c.ciudad
+                td=c.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/city/upd/" + c.idciudad)           
+                        | Actualizar
+                    form(action='/admin/city/delete/' + c.idciudad + '?_method=DELETE' method="post")
+                        input(type='hidden' name='_method' value='DELETE')
+                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/city/add').button-hovered.not-rounded.orange_custom.text-white Agregar ciudad
+// State window
+#window_state.window.bs-7
+  .window_header
+    h4 Estados
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Fecha de ingreso
+          th Acciones
+      tbody
+        each s in states
+            tr
+                td=s.estado
+                td=s.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/state/upd/" + s.idestado)           
+                        | Actualizar
+                    form(action='/admin/state/delete/' + s.idestado + '?_method=DELETE' method="post")
+                        input(type='hidden' name='_method' value='DELETE')
+                        input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/state/add').button-hovered.not-rounded.orange_custom.text-white Agregar Estado        
+// Publish window
+#window_publish.window.bs-7
+  .window_header
+    h4 Publikate
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Estado
+          th Fecha de creación
+          th Acciones
+      tbody
+        each p in publishs
+            tr
+                td=p.emprendimiento
+                if (p.status == 1)
+                    td.text-primary Activo
+                else 
+                    td.text-red Inactivo
+                td=p.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                    a.button-hovered.button.not-rounded.purple_custom.text-white(href="/admin/publish/upd/" + p.idemprendimiento)           
+                      | Actualizar
+                    a.button-hovered.button.not-rounded.orange_custom.text-white(href="/admin/publish/view/" + p.idemprendimiento)
+                      | Visualizar
+                    form(action='/admin/publish/block/' + p.idemprendimiento method='POST')
+                        if (p.status == 1)
+                            button(type='submit').button-hovered.not-rounded.red_custom.text-white Bloquear
+                        else
+                            button(type='submit').button-hovered.not-rounded.success.text-white Habilitar
+// Katalogs window
+#window_katalogs.window.bs-7
+  .window_header
+    h4 Katalogo
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    h2.text-center.text-italic
+        | Próximamente
+// Carousel window
+#window_carousel.window.bs-7
+  .window_header
+    h4 Carrusel de imágenes
+    ul.button_commands
+      li
+        a.window_maximize.tooltip-top(href="#" data-tooltip='Espandir ventana')
+          i.bx.bx-fullscreen
+      li
+        a.window_minimize.tooltip-top(href="#" data-tooltip='Esconder ventana')
+          i.material-icons minimize
+            
+      li
+        a.window_close.tooltip-top(href="#" data-tooltip='Cerrar ventana')
+          i.material-icons close
+            
+  .window_body
+    table.table.table-bordered.table-hovered
+      thead.white
+        tr
+          th Nombre
+          th Estado
+          th Fecha de creación
+          th Acciones
+      tbody
+        each c in sliders
+            tr
+                td=c.nombre
+                if (c.status === 1)
+                  td.text-uppercase.text-success Activo
+                else
+                  td.text-uppercase.text-danger Inactivo
+                td=c.created_at.toISOString().substr(0, 10)
+                td.has-row.is-centered
+                  form(action='/admin/carousel/delete/' + c.idcarrusel + '?_method=DELETE' method="post")
+                      input(type='hidden' name='_method' value='DELETE')
+                      input.button-hovered.not-rounded.red_custom.text-white(type="submit" value="Borrar")
+    if (user.rol == 0)
+        a(href='/admin/carousel/add').button-hovered.not-rounded.orange_custom.text-white Agregar slider

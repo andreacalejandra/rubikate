@@ -1,0 +1,57 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (result)
+            p.mb-2.size-mini.text-italic Todos los campos son requeridos
+            form(action='/admin/publish/category/upd' method='POST' enctype="multipart/form-data")
+                input(type='hidden' value=result.idpadre name='idpadre')
+                input(type='hidden' name='id' value=result.idcategoria)
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Nombre de la categoría' value=result.nombre name='nombre' required)#nombre
+                            label(for='nombre') Nombre de la categoría
+                    .col-md
+                        .form.mb-3
+                            input(type='color' value=result.color name='color' required)#color
+                            label(for='color') Color de la categoría
+                if (result.idpadre === 0)
+                    .row
+                        .col-md
+                            .form-simple.mb-3
+                                label(for='color') Imagen de la categoría
+                                input(type='file' placeholder='Imagen de la categoría' value=result.imagen name='image' required)#imagen
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Actualizar
+        else
+            p.mb-2.size-mini.text-italic Todos los campos son requeridos
+            form(action='/admin/category/add' method='POST' enctype="multipart/form-data")
+                .row
+                    .col-md
+                        .form.mb-3
+                            input(type='text' placeholder='Nombre de la categoría' name='nombre' value=nombre required)#nombre
+                            label(for='nombre') Nombre de la categoría
+                    .col-md
+                        .form.mb-3
+                            input(type='color' name='color' value=color required)#color
+                            label(for='color') Color de la categoría
+                            
+                .row
+                    .col-md
+                        .form-simple.mb-3
+                            label(for='imagen') Imagen de la categoría
+                            input(type='file' placeholder='Imagen de la categoría' name='image' required)#imagen
+                    .col-md
+                        .form.mb-3
+                            select(name='idpadre' required)#categoria
+                                option(selected value='0') Principal
+                                each category in categories
+                                    if (category.idpadre == 0)
+                                        option(value=category.idcategoria)= category.nombre
+                            label(for='idpadre')#categoria Tipo de categoría
+                .text-center.mb-3
+                    button.button-hovered.purple_custom.text-white(type="submit") Guardar
+    a(href='/admin').button__back Volver al inicio

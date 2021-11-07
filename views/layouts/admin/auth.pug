@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="robots" content="noindex,nofollow")
+    title #{title} | #{section}
+    link(rel='shortcut icon' href='/img/site/favicon.ico')
+    // ICON CSS CDN
+    link(rel='stylesheet' href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet')
+    // CSS FRAMEWORK
+    link(rel='stylesheet' href='/css/custom/dashboard/oceanglitch.min.css')
+    // CUSTOM CSS
+    link(rel='stylesheet' href='/css/custom/dashboard/dashboard-auth.min.css')    
+    script(type="text/javascript" src='/js/vendor/jquery/jquery-3.6.0.min.js')
+  body
+    main
+      include ../../inc/general/alert
+      block content
+    // VENDORS JS
+    script(type="text/javascript" src='/js/vendor/jquery/jquery-3.6.0.min.js')
+    script(type="text/javascript" src='/js/custom/dashboard.min.js')
+    // CUSTOM JS
+    script(defer type="text/javascript" src='/js/custom/owner.min.js')
+    
+    
+
+
+

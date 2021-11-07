@@ -1,0 +1,82 @@
+extends ../layouts/site/publish
+
+block content
+    .section__category
+        p.f-3.text-bold.center-align Resultados de la busqueda
+    .row
+        if (result)
+            each res in result
+                if (res.status == 1)
+                    .col.m3
+                        .card.hoverable
+                            .card-image
+                                img(src=res.logo)
+                                a.btn-floating.halfway-fab.waves-effect.waves-light.purple.pulse.modal-trigger(href=('#modal' + res.idemprendimiento))
+                                    i.material-icons(style='font-size: 1.5rem !important') visibility
+                            .card-content
+                                ul.collection
+                                    li.collection-item
+                                        i.bx.bxs-phone
+                                        a.black-text(href='https://api.whatsapp.com/send?phone=' + res.telefono)=res.telefono                                                    
+                                    if (res.redesSociales == 'instagram')
+                                        li.collection-item
+                                            i.bx.bxl-instagram-alt
+                                            a.black-text(href='http://www.instagram.com/' + res.urlRedesSociales)= res.urlRedesSociales
+                                    else if (res.redesSociales == 'facebook')
+                                        li.collection-item
+                                            i.bx.bxl-facebook-circle
+                                            a.black-text(href='http://www.facebook.com/' + res.urlRedesSociales)= res.urlRedesSociales
+                                    else if (res.redesSociales == 'twitter')
+                                        li.collection-item
+                                            i.bx.bxl-twitter  
+                                            a.black-text(href='http://www.twitter.com/' + res.urlRedesSociales)= res.urlRedesSociales
+                                    li.collection-item
+                                        i.bx.bx-current-location 
+                                        = res.direccion
+                                    li.collection-item
+                                        i.bx.bxs-truck 
+                                        span Delivery: 
+                                            = res.delivery ? 'Si' : 'No'
+                                .center-align
+                                    if (res.sitioWeb === 1)
+                                        a(href=res.nombreUrl).btn.purple Catalogo
+                        .modal(id=('modal' + res.idemprendimiento))
+                            .modal-content
+                                .row
+                                    .col.m12
+                                        p.center-align.f-3= res.emprendimiento
+                                        p.text-bold Descripción: 
+                                        p=res.descripcion
+                                        p.text-bold Correo electrónico:
+                                        p=res.correo
+                                        p.text-bold Ubicación:
+                                        each ci in cities
+                                            if (ci.idciudad === res.idciudad)    
+                                                p=ci.ciudad
+                                        if (res.foto1 == null)
+                                        
+                                        else
+                                            #carousel-modal.carousel.carousel-slider.pt-5
+                                                if (res.foto1)
+                                                    .carousel-item
+                                                        img(src=res.foto1 alt='carousel_one').responsive-img.materialboxed
+                                                if (res.foto2)
+                                                    .carousel-item
+                                                        img(src=res.foto2 alt='carousel_two').responsive-img.materialboxed
+                                                if (res.foto3)
+                                                    .carousel-item
+                                                        img(src=res.foto3 alt='carousel_three').responsive-img.materialboxed
+                                                if (res.foto4)
+                                                    .carousel-item
+                                                        img(src=res.foto4 alt='carousel_four').responsive-img.materialboxed
+                                                if (res.foto5)
+                                                    .carousel-item
+                                                        img(src=res.foto5 alt='carousel_five').responsive-img.materialboxed
+                                                if (res.foto6)
+                                                    .carousel-item
+                                                        img(src=res.foto6 alt='carousel_six').responsive-img.materialboxed
+                
+        else
+            .row
+                .col-md
+                    p.text-italic Vuelva a intentarlo nuevamente

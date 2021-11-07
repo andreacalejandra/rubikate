@@ -1,0 +1,58 @@
+footer
+    .container-footer   
+        .grid-footer
+            .logo
+                img(src='/img/site/footer_logo_h.png' alt='logo-footer')
+            if (site)
+                .information.center-align
+                    p= site.direccion + ". "
+                    p= site.correo
+        .grid-footer
+            p.f-1 Rubikate
+            ul
+                li
+                    a(href='/plan').black-text Planes Rubikate
+                li
+                    a(href='/about').black-text Nosotros
+        .grid-footer
+            p.f-1.title-section Categorías disponibles
+            .row
+                .col.m6
+                    ul
+                        each res in nav_categories
+                            if (res.idpadre === 0)
+                                if (res.idcategoria < 7)
+                                    li
+                                        a.black-text(href='/publish/' + res.idcategoria + '/' + 0)=res.nombre
+                .col.m6
+                    ul  
+                        each res in nav_categories
+                                if (res.idpadre === 0)
+                                    if (res.idcategoria > 6 )
+                                        li
+                                            a.black-text(href='/publish/' + res.idcategoria + '/' + 0)=res.nombre
+    .social
+        if (site)
+            if (site.facebook)
+                a(href="https://www.facebook.com/" + site.facebook)
+                    i.bx.bxl-facebook
+            if (site.twitter)
+                a(href='https://twitter.com/' + site.twitter)
+                    i.bx.bxl-twitter
+            if (site.instagram)
+                a(href='https://www.instagram.com/' + site.instagram)
+                    i.bx.bxl-instagram-alt
+            if (site.whatsapp)
+                a(href='https://wa.me/' + site.whatsapp)
+                    i.bx.bxl-whatsapp
+            if (site.telegram)
+                a(href='https://t.me/' + site.telegram)
+                    i.bx.bxl-telegram
+    .grid-footer-end
+        p &copy; Todos los derechos reservados 2021 
+            span.text-bold Rubikate. 
+        a(href='https://github.com/OceanGlitch/').logo_dev
+            p Desarrollado por
+            img(src='/img/site/dev/og.svg' alt='OceanGlitch')
+            p OceanGlitch
+                    

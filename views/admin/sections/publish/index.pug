@@ -1,0 +1,54 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header
+        h1 #{section}
+    .form__layout
+        if (result.length > 0)
+            table.table.table-bordered.table-hovered
+                thead.white
+                    tr
+                        th Top
+                        th Estado
+                        th Nombre
+                        th Categoría
+                        th Fecha de creación
+                        th Acciones
+                tbody
+                    each publish in result
+                        tr
+                            if (publish.top == 0)
+                                td.text-red.text-bold Deshabilitado
+                            if (publish.status == 1)
+                                td.text-success.text-bold Habilitado
+                            if (publish.status == 0)
+                                td.text-red.text-bold Deshabilitado
+                            td= publish.emprendimiento
+                            td= publish.nombre
+                            td= publish.created_at.toISOString().substr(0, 10)
+                            if (publish.top == 1)
+                                td.text-success.text-bold Habilitado
+                            td.is-centered
+                                a(href='/admin/publish/upd/' + publish.idemprendimiento).button.button-hovered.success.text-white.not-rounded
+                                    | Actualizar
+                                a(href='/admin/publish/view/' + publish.idemprendimiento).button.button-hovered.primary.text-white.not-rounded
+                                    | Visualizar 
+                                form(action='/admin/publish/block/' + publish.idemprendimiento, method='POST')
+                                    if (publish.status == 1)
+                                        button(type='submit').button-hovered.red_custom.text-white
+                                            | Inhabilitar
+                                    if (publish.status == 0)
+                                        button(type='submit').button-hovered.purple_custom.text-white
+                                            | Habilitar
+                                form(action='/admin/publish/top/' + publish.idemprendimiento, method='POST')
+                                    if (publish.top == 1)
+                                        button(type='submit').button-hovered.warning.text-white
+                                            | Quitar Top
+                                    if (publish.top == 0)
+                                        button(type='submit').button-hovered.purple.text-white
+                                            | Habilitar Top
+        else
+            .border-bottom.mt-2.mb-5
+            h3.text-center No existe ningun emprendimiento registrado.
+            .border-bottom.mt-5.mb-2
+    a(href='/admin').button__back Volver al inicio

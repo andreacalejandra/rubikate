@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="robots" content="noindex,nofollow")
+    title #{title} | #{section}
+    link(rel='shortcut icon' href='/img/site/favicon.ico')
+    // ICON CSS CDN
+    link(rel='stylesheet' href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet')
+    // CSS FRAMEWORK
+    link(rel='stylesheet' href='/css/custom/dashboard/oceanglitch.min.css')
+    // CUSTOM CSS
+    link(rel='stylesheet' href='/css/custom/dashboard/dashboard.min.css')
+    // VENDORS CSS
+    link(rel='stylesheet' href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css")
+    
+    script(type="text/javascript" src='/js/vendor/jquery/jquery-3.6.0.min.js')
+    script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.4/js/languages/es.min.js')
+    script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js")
+  body
+    include ../../inc/admin/navbar
+    main
+      include ../../inc/general/alert
+      block content
+      .row
+        .col-md-10
+          include ../../inc/admin/counts
+        .col-md-2
+          .tooltip-top.tooltip-mobile.nav__menu-toggle.animate-in(data-tooltip='Menu principal')
+            i.material-icons apps 
+      
+    // VENDORS JS
+    script(type="text/javascript" src='/js/vendor/jquery/jquery-3.6.0.min.js')
+    script(type="text/javascript" src='/js/vendor/jquery/jquery-ui.min.js')
+    script(type="text/javascript" src='/js/custom/dashboard.min.js')
+    
+    
+
+
+

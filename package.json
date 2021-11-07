@@ -1,0 +1,42 @@
+{
+  "name": "rubikate",
+  "version": "0.1.5",
+  "private": true,
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-mysql": "0.0.1",
+    "express-mysql-session": "^2.1.6",
+    "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "nl2br": "0.0.3",
+    "nodemailer": "^6.6.3",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2",
+    "serve-favicon": "^2.5.0",
+    "swup": "^2.0.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "set NODE_ENV=production&& node app.js",
+    "dev": "set NODE_ENV=development&& nodemon app.js"
+  },
+  "author": "OceanGlitch",
+  "license": "ISC"
+}

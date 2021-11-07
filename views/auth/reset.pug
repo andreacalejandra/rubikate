@@ -1,0 +1,21 @@
+extends ../layouts/admin/auth
+
+block content
+    .container-fluid
+        section.auth__content.animate-left-ease
+            .row
+                .col-md
+                    .auth_icon.has-glass-md
+                        h1 #{section}
+            .card.animate_down
+                .card-body
+                    form(action='/auth/reset' method='POST' autocomplete='off')#login-form
+                        input(type='hidden' value= user.id name='id')
+                        .mb-3.form-glass
+                            input(type='password' placeholder='Ingrese la nueva contraseña' name='clave')#clave
+                        .mb-3.form-glass
+                            input(type='password' placeholder='Ingrese su contraseña' name='clave_repeat')#clave_repeat
+                        .mb-3.text-center
+                            button(type='submit').button.button-glass.bordered-white.has-shadow-sm Finalizar
+    script.
+        $('#login-form').disableAutoFill();

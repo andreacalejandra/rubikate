@@ -1,0 +1,60 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        if (result)
+            form(action='/admin/user/upd' method="post")
+                input(type='hidden' value=result.id name='id')
+                .row.mb-3
+                    .col-md
+                        .form
+                            input#clave(type="password", name="clave", placeholder="Ingrese la contraseña" required)
+                            label(for="clave") Ingrese la contraseña
+                    .col-md
+                        .form
+                            input#clave_repeat(type='password' name='clave_repeat' placeholder='Repita la contraseña' required)
+                            label(for='clave_repeat') Repita la contraseña
+                .d-grid
+                    button.button-hovered.purple_custom.text-white(type="submit") Actualizar
+        else
+            p.mt-2.text-bold.text-uppercase Importante: 
+                span.text-normal.text-style-none Es importante recordar la respuesta, pues es el único medio de recuperación de cuenta. Se distinguen mayusculas de minusculas
+            form(action='/admin/user/add' method="post")
+                .row.mb-3.mt-2
+                    .col-md
+                        .form
+                            input#usuario(type="text", name="usuario", placeholder="Ingrese el usuario" required)
+                            label(for="usuario") Ingrese el usuario
+                    .col-md
+                        .form
+                            input#correo(type="text", name="correo", placeholder="Ingrese el correo electrónico" required)
+                            label(for="correo") Ingrese el correo electrónico
+                .row.mb-3
+                    .col-md
+                        .form
+                            input#clave(type="password", name="clave", placeholder="Ingrese la contraseña" required)
+                            label(for="clave") Ingrese la contraseña
+                    .col-md
+                        .form
+                            input#clave_repeat(type='password' name='clave_repeat' placeholder='Repita la contraseña' required)
+                            label(for='clave_repeat') Repita la contraseña
+                .row.mb-3
+                    .col-md
+                        .form
+                            select(name='pregunta' required)
+                                option(selected disabled) Elija una pregunta
+                                option(value='1') ¿Cuál es el nombre de su madre?
+                                option(value='2') ¿Cuál fue su primera mascota?
+                                option(value='3') ¿Cuál es tu comida favorita?
+                                option(value='4') ¿Donde estudió la primaria?
+                                option(value='5') ¿Cuál es su color favorito?
+                            label(for='pregunta') Elija una pregunta
+                    .col-md
+                        .form
+                            input#respuesta(type='text' name='respuesta' placeholder='Ingrese la respuesta' required)
+                            label(for='respuesta') Ingrese la respuesta
+                .d-grid
+                    button.button-hovered.purple_custom.text-white(type="submit") Registrar
+    a(href='/admin').button__back Volver al inicio

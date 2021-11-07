@@ -1,0 +1,18 @@
+extends ../layouts/admin/auth
+
+block content
+    .container-fluid
+        section.auth__content.animate-left-ease
+            .row
+                .col-md
+                    .auth_icon.has-glass-md
+                        h1 #{section}
+            .card
+                .card-body
+                    form(action='/auth/forgot' method='POST' autocomplete='off')#login-form
+                        .mb-3.form-glass
+                            input(type='text' placeholder='Ingrese su correo' name='correo')#correo
+                        .mb-3.text-center
+                            button(type='submit').button.button-glass.bordered-white.has-shadow-sm Siguiente >
+    script.
+        $('#login-form').disableAutoFill();

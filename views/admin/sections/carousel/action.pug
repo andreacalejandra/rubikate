@@ -1,0 +1,13 @@
+extends ../../../layouts/admin/index2
+
+block content
+    .form__header.bs-8
+        h1 #{section}
+    .form__layout
+        form(method='post' action='/admin/carousel/add' enctype="multipart/form-data")
+            .form-simple.mb-4
+                label(for='image') Agregue la imagen
+                input(type='file' placeholder='Ingrese el archivo' name='image' required)#image
+            .text-center.mb-3
+                button.button-hovered.purple_custom.text-white(type="submit") Registrar
+    a(href='/admin').button__back Volver al inicio

@@ -1,0 +1,30 @@
+extends ../layouts/admin/auth
+
+block content
+    .container-fluid
+        section.auth__content.animate-left-ease
+            .row
+                .col-md
+                    .auth_icon.has-glass-md
+                        h1 #{section}
+            .card
+                .card-body
+                    form(action='/auth/verify' method='POST' autocomplete='off')#login-form
+                        input(type='hidden' value=user.id name='id')
+                        .mb-3.form-glass
+                            if (user.pregunta == 1)
+                                input(type='text' disabled value='¿Cuál es el nombre de su madre?')
+                            if (user.pregunta == 2)
+                                input(type='text' disabled value='¿Cuál fue su primera mascota?')
+                            if (user.pregunta == 3)
+                                input(type='text' disabled value='¿Cuál es tu comida favorita?')
+                            if (user.pregunta == 4)
+                                input(type='text' disabled value='¿Donde estudió la primaria?')
+                            if (user.pregunta == 5)
+                                input(type='text' disabled value='¿Cuál es su color favorito?')
+                        .mb-3.form-glass
+                            input(type='password' placeholder='Ingrese la respuesta' name='respuesta')#respuesta
+                        .mb-3.text-center
+                            button(type='submit').button.button-glass.bordered-white.has-shadow-sm Siguiente >
+    script.
+        $('#login-form').disableAutoFill();

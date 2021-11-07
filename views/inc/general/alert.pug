@@ -1,0 +1,40 @@
+if errors && errors.length > 0
+    .notification.has-error.is-active.is-show
+        span.title Se encontraron errores al procesar la solicitud
+        span.message
+            ul
+                each error in errors
+                    li=error
+        span.notification-toggle
+            i.bx.bx-x-circle
+// errors-end#
+
+if success && success.length > 0
+    .notification.has-success.is-active.is-show
+        span.icon-notification
+            i.bx.bxs-check-circle
+        span.message #{success}
+        span.notification-toggle
+            i.bx.bx-x-circle
+if warning && warning.length > 0
+    .notification.has-warning.is-active.is-show
+        span.icon-notification
+            i.bx.bxs-bell-ring
+        span.message #{warning}
+        span.notification-toggle
+            i.bx.bx-x-circle
+if danger && danger.length > 0
+    .notification.has-danger.is-active.is-show
+        span.icon-notification
+            i.bx.bxs-error-circle
+        span.message #{danger}
+        span.notification-toggle
+            i.bx.bx-x-circle
+if info && info.length > 0
+    .notification.has-info.is-active.is-show
+        span.icon-notification
+            i.bx.bxs-info-circle
+        span.message #{info}
+        span.notification-toggle
+            i.bx.bx-x-circl
+// message-end#

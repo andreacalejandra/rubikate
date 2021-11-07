@@ -1,0 +1,31 @@
+.navigation-main
+    .wrapper-navigation
+        .navigation
+            .nav-toggle
+                i.bx.bx-x
+                i.bx.bx-menu
+            a.brand-nav
+                img(src='/img/site/nav-icon.png' alt='logo' width='64px')
+            ul.navigation-ul
+                li
+                    a(href='/')#nav-link Inicio
+                li
+                    a(href='/plan')#nav-link Planes publikate
+                li
+                    a(href='#') Categorias 
+                    ul.sub-menu
+                        if (nav_categories)
+                            each res in nav_categories
+                                if (res.idpadre === 0)
+                                    li
+                                        a(href='/publish/' + res.idcategoria + '/' + 0)#nav-link= res.nombre
+                li
+                    a(href='/about') Nosotros
+                if (user)
+                    li.has-right
+                        a(href='#') Administración
+                        ul.sub-menu
+                            li
+                                a(href='/admin') Panel Admin.
+                            li
+                                a(href='/auth/logout') Salir
