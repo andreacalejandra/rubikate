@@ -4,7 +4,7 @@ USE rubikate;
 CREATE TABLE IF NOT EXISTS `rubikate`.`acciones` (
   `idaccion` INT NOT NULL AUTO_INCREMENT,
   `Accion` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idaccion`))
 COMMENT = 'Tabla de acciones';
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`auditorias` (
   `idadministrador` INT NOT NULL,
   `idaccion` INT NOT NULL,
   `tabla` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idauditoria`))
 COMMENT = 'Tabla de auditorias';
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`ciudades` (
   `idciudad` INT NOT NULL AUTO_INCREMENT,
   `idestado` INT NOT NULL,
   `ciudad` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idciudad`))
 COMMENT = 'Tabla de ciudades';
@@ -45,7 +45,7 @@ COMMENT = 'Tabla de ciudades';
 CREATE TABLE IF NOT EXISTS `rubikate`.`clasificacion` (
   `idclasificacion` INT NOT NULL AUTO_INCREMENT,
   `clasificacion` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idclasificacion`))
 COMMENT = 'Tabla de clasificacion';
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`emprendimientos` (
   `sitioWeb` TINYINT NULL,
   `nombreUrl` VARCHAR(255) NULL,
   `videoUrl` VARCHAR(255) NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idemprendimiento`))
 COMMENT = 'Tabla de emprendimientos';
@@ -76,7 +76,7 @@ COMMENT = 'Tabla de emprendimientos';
 CREATE TABLE IF NOT EXISTS `rubikate`.`especificacion` (
   `idespecificacion` INT NOT NULL AUTO_INCREMENT,
   `especificacion` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idespecificacion`))
 COMMENT = 'Tabla de especificacion';
@@ -84,7 +84,7 @@ COMMENT = 'Tabla de especificacion';
 CREATE TABLE IF NOT EXISTS `rubikate`.`estados` (
   `idestado` INT NOT NULL AUTO_INCREMENT,
   `estado` VARCHAR(255) NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idestado`))
 COMMENT = 'Tabla de estados';
@@ -94,7 +94,7 @@ CREATE TABLE `rubikate`.`extras` (
   `extras` VARCHAR(255) NOT NULL,
   `precioExtra` INT NOT NULL,
   `idproducto` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idextra`))
 COMMENT = 'Tabla de extras';
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`fotografia` (
   `idfotografia` INT NOT NULL AUTO_INCREMENT,
   `fotografia` VARCHAR(255) NOT NULL,
   `idproducto` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idfotografia`))
 COMMENT = 'Tabla de fotografia';
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`fotos` (
   `foto6` VARCHAR(255) NULL,
   `banner` VARCHAR(255) NULL,
   `idpublicacion` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idfoto`))
 COMMENT = 'Tabla de fotos';
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`imagenes` (
   `idimagen` INT NOT NULL AUTO_INCREMENT,
   `imagen` VARCHAR(255) NULL,
   `idpublicacion` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idimagen`))
 COMMENT = 'Tabla de imagenes';
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`medida` (
   `medida` VARCHAR(145) NOT NULL,
   `valor` INT NOT NULL,
   `idespecificacion` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idmedida`))
 COMMENT = 'Tabla de medidas';
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`pedido` (
   `cantidad` INT NOT NULL,
   `idproducto` INT NOT NULL,
   `descripcion` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idpedido`))
 COMMENT = 'Tabla de pedido';
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`presentacion` (
   `idpresentacion` INT NOT NULL AUTO_INCREMENT,
   `presentacion` VARCHAR(255) NOT NULL,
   `descripcion` LONGTEXT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idpresentacion`))
 COMMENT = 'Tabla de presentacion';
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`producto` (
   `idemprendimiento` INT NOT NULL,
   `idclasificacion` INT NOT NULL,
   `idpresentacion` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idproducto`))
 COMMENT = 'Tabla de productos';
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`publikate` (
   `emprendimiento` VARCHAR(255) NOT NULL,
   `correo` VARCHAR(255) NOT NULL,
   `telefono` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idpublikate`))
 COMMENT = 'Tabla de publikate';
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`usuarios` (
   `cedula` VARCHAR(255) NOT NULL,
   `telefono` VARCHAR(255) NOT NULL,
   `correo` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   UNIQUE KEY (`cedula`),
   PRIMARY KEY (`idusuario`))
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`planes` (
   `descripcion` LONGTEXT NOT NULL,
   `costo` INT NOT NULL,
   `duracion` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
   `updated_at` TIMESTAMP NULL,
   PRIMARY KEY (`idplan`))
 COMMENT = 'Tabla de planes';
@@ -311,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `rubikate`.`categorias` (
   `nombre` VARCHAR(255) NOT NULL,
   `imagen` VARCHAR(255) NOT NULL,
   `color` VARCHAR(45) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp,
   `updated_at` TIMESTAMP NULL,
   UNIQUE KEY (`nombre`),
   PRIMARY KEY (`idcategoria`))
