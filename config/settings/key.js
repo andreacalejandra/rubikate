@@ -1,9 +1,9 @@
 module.exports = {
 	database: {
-		user: 'root',
+		user: 'newuser',
 		host: 'localhost',
 		database: 'rubikate',
-		password: '123456789',
+		password: 'password',
 		port: 3306
 	}
 }
