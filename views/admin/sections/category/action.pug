@@ -6,7 +6,7 @@ block content
     .form__layout
         if (result)
             p.mb-2.size-mini.text-italic Todos los campos son requeridos
-            form(action='/admin/publish/category/upd' method='POST' enctype="multipart/form-data")
+            form(action='/admin/category/upd' method='POST' enctype="multipart/form-data")
                 input(type='hidden' value=result.idpadre name='idpadre')
                 input(type='hidden' name='id' value=result.idcategoria)
                 .row
@@ -18,12 +18,11 @@ block content
                         .form.mb-3
                             input(type='color' value=result.color name='color' required)#color
                             label(for='color') Color de la categoría
-                if (result.idpadre === 0)
-                    .row
-                        .col-md
-                            .form-simple.mb-3
-                                label(for='color') Imagen de la categoría
-                                input(type='file' placeholder='Imagen de la categoría' value=result.imagen name='image' required)#imagen
+                .row
+                    .col-md
+                        .form-simple.mb-3
+                            label(for='color') Imagen de la categoría
+                            input(type='file' placeholder='Imagen de la categoría' value=result.imagen name='image')#imagen
                 .text-center.mb-3
                     button.button-hovered.purple_custom.text-white(type="submit") Actualizar
         else

@@ -42,4 +42,4 @@ exports.getAboutPage = async (req, res) => {
         site,
         carrusel
     })
-};
+}; 

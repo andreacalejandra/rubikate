@@ -25,7 +25,7 @@ exports.getCategoryPage = async (req, res) => {
         const count = parseInt(countItems[0].rows);
         const totalPages = Math.ceil(count / limit);
         try {
-            const result = await pool.query('select distinct * FROM emprendimientos, publicaciones, fotos, usuarios, categorias WHERE emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND emprendimientos.idcategoria = categorias.idcategoria AND publicaciones.idpublicacion = fotos.idpublicacion AND categorias.idpadre = ' + category + ' AND publicaciones.status = 1 AND emprendimientos.idusuario = usuarios.idusuario LIMIT ' + limit + ' OFFSET ' + offset, async (err, doc) => {
+            const result = await pool.query('SELECT DISTINCT * FROM emprendimientos, publicaciones, fotos, usuarios, categorias WHERE emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND emprendimientos.idcategoria = categorias.idcategoria AND publicaciones.idpublicacion = fotos.idpublicacion AND categorias.idpadre = ' + category + ' AND publicaciones.status = 1 AND emprendimientos.idusuario = usuarios.idusuario LIMIT ' + limit + ' OFFSET ' + offset, async (err, doc) => {
                 if (err) {
                     return err;
                 } else {
@@ -68,7 +68,7 @@ exports.getCategoryPage = async (req, res) => {
         const count = parseInt(countItems[0].rows);
         const totalPages = Math.ceil(count / limit);
         try {
-            const result = await pool.query('select * from emprendimientos, publicaciones, fotos where emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND publicaciones.idpublicacion = fotos.idpublicacion AND emprendimientos.idcategoria = ' + category + ' LIMIT ' + limit + ' OFFSET ' + offset, async (err, doc) => {
+            const result = await pool.query('SELECT * FROM emprendimientos, publicaciones, fotos where emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND publicaciones.idpublicacion = fotos.idpublicacion AND emprendimientos.idcategoria = ' + category + ' LIMIT ' + limit + ' OFFSET ' + offset, async (err, doc) => {
                 if (err) {
                     return err;
                 } else {
@@ -109,7 +109,7 @@ exports.postSearch = async (req, res) => {
         if (category === undefined) {
             const rows = await pool.query('SELECT idciudad FROM ciudades WHERE ciudad = ?', [city]);
             const idciudad = rows[0].idciudad;
-            const result = await pool.query('select * from emprendimientos, publicaciones, fotos where emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND publicaciones.idpublicacion = fotos.idpublicacion AND emprendimientos.idciudad = ?', [idciudad]);
+            const result = await pool.query('SELECT * FROM emprendimientos, publicaciones, fotos where emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND publicaciones.idpublicacion = fotos.idpublicacion AND emprendimientos.idciudad = ?', [idciudad]);
             res.render('home/search', {
                 section: 'Resultados de la busqueda',
                 nav_categories,
@@ -119,7 +119,7 @@ exports.postSearch = async (req, res) => {
             })
         } 
         if (city === undefined) {
-            
+
             const result = await pool.query('SELECT * FROM emprendimientos, publicaciones, fotos WHERE emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND publicaciones.idpublicacion = fotos.idpublicacion AND emprendimientos.idcategoria = ' + category);
             res.render('home/search', {
                 section: 'Resultados de la busqueda',

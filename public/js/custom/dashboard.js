@@ -167,3 +167,45 @@ $(document).ready(function() {
         }
     })
 })
+
+
+/**
+ * Query selector
+ * @param {string} element
+ * @returns {Object}
+ */
+ const elmSelect = (element) => document.querySelector(element);
+
+ /**
+  * Query selector all
+  * @param {String} element
+  * @returns {Object}
+  */
+ const elmSelectAll = (element) => document.querySelectorAll(element);
+
+
+/**
+ * Notification initialization
+ * @param {String} toggleElm
+ * @param {String} notifyElm
+ * @param {Number} timeValue
+ * @returns {Object}
+ */
+ const notifications = (toggleElm, notifyElm, timeValue) => {
+    const toggle = elmSelect(toggleElm);
+    const notification = elmSelect(notifyElm);
+    const time = parseInt(timeValue) || 3000;
+
+    if(toggle && notification && time) {
+        toggle.addEventListener('click', () => {
+            notification.classList.remove('is-active');
+            notification.classList.add('is-hidden');
+        });
+        setTimeout(function() {
+            notification.classList.remove('is-active');
+            notification.classList.add('is-hidden');
+        }, time);
+    }
+}
+
+notifications('.notification-toggle', '.notification');

@@ -19,6 +19,8 @@ block content
                         tr
                             if (publish.top == 0)
                                 td.text-red.text-bold Deshabilitado
+                            if (publish.top == 1)
+                                td.text-success.text-bold Habilitado
                             if (publish.status == 1)
                                 td.text-success.text-bold Habilitado
                             if (publish.status == 0)
@@ -26,8 +28,6 @@ block content
                             td= publish.emprendimiento
                             td= publish.nombre
                             td= publish.created_at.toISOString().substr(0, 10)
-                            if (publish.top == 1)
-                                td.text-success.text-bold Habilitado
                             td.is-centered
                                 a(href='/admin/publish/upd/' + publish.idemprendimiento).button.button-hovered.success.text-white.not-rounded
                                     | Actualizar
