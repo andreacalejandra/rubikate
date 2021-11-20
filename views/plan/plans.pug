@@ -8,26 +8,26 @@ block content
         .row.mb-3
             each plan in plans
                 .col.m12.mb-3
-                    .card
+                    .card.hoverable
                         .card-content
                             p.f-1.text-bold.center-align= plan.nombre
                             span !{plan.descripcion}
                             .row.center-align.mt-3
                                 .col.m6
                                     p.text-bold Duración: 
-                                        if (plan.duracion == 0)
-                                            span.text-normal Gratís
+                                        span.text-normal=plan.duracion
+                                        if (plan.duracion > 1)
+                                            |  meses
                                         else
-                                            span.text-normal=plan.duracion
-                                            if (plan.duracion > 1)
-                                                |  meses
-                                            else
-                                                |  mes
+                                            |  mes
                                 .col.m6
                                     p.text-bold Precio: 
                                         span.text-normal
-                                            | $
-                                            =plan.costo
+                                            if (plan.costo == 0)
+                                                | Gratis
+                                            else
+                                                | $
+                                                =plan.costo
                                             
                         .card-action.center-align
                             a(href='/plan/needed/register/' + plan.idplan).btn.purple.border-rounded

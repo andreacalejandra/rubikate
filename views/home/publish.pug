@@ -29,7 +29,7 @@ block content
             .col.m3
                 .card
                     if (c.idpadre < 1)
-                        .card-imoge.center-align
+                        .center-align
                             img(src=c.imagen alt=title).img-rounded
                     .card-title.center-align
                         p.size-2 #{title}
@@ -41,84 +41,83 @@ block content
                                     a(href='/publish/' + s.idcategoria + '/' + 0).black-text= s.nombre
             .col.m9
                 if (data)
-                    .row
-                        each res in data
-                            if (res.status === 1)
-                                .col.m4
-                                    .card.hoverable
-                                        .card-image
-                                            img(src=res.logo)
-                                            a.btn-floating.halfway-fab.waves-effect.waves-light.purple.pulse.modal-trigger(href=('#modal' + res.idemprendimiento))
-                                                i.material-icons(style='font-size: 1.5rem !important') visibility
-                                        .card-content
-                                            ul.collection
+                    each res in data
+                        if (res.status === 1)
+                            .col.m4
+                                .card.large.hoverable.card-publish
+                                    .card-image
+                                        img(src=res.logo)
+                                        a.btn-floating.halfway-fab.purple.pulse.modal-trigger(href=('#modal' + res.idemprendimiento))
+                                            i.material-icons(style='font-size: 1.5rem !important') visibility
+                                    .card-content
+                                        ul.collection
+                                            li.collection-item
+                                                i.bx.bxs-phone(style='color: ' + c.color + ' ;')
+                                                a(href='https://api.whatsapp.com/send?phone=' + res.telefono style='color: ' + c.color + ' ;')=res.telefono                                                    
+                                            if (res.redesSociales == 'instagram')
                                                 li.collection-item
-                                                    i.bx.bxs-phone(style='color: ' + c.color + ' ;')
-                                                    a(href='https://api.whatsapp.com/send?phone=' + res.telefono style='color: ' + c.color + ' ;')=res.telefono                                                    
-                                                if (res.redesSociales == 'instagram')
-                                                    li.collection-item
-                                                        i.bx.bxl-instagram-alt(style='color: ' + c.color + ' ;')
-                                                        a(href='http://www.instagram.com/' + res.urlRedesSociales style='color: ' + c.color + ' ;')= res.urlRedesSociales
-                                                else if (res.redesSociales == 'facebook')
-                                                    li.collection-item
-                                                        i.bx.bxl-facebook-circle(style='color: ' + c.color + ' ;')
-                                                        a(href='http://www.facebook.com/' + res.urlRedesSociales style='color: ' + c.color + ' ;')= res.urlRedesSociales
-                                                else if (res.redesSociales == 'twitter')
-                                                    li.collection-item
-                                                        i.bx.bxl-twitter(style='color: ' + c.color + ' ;')  
-                                                        a(href='http://www.twitter.com/' + res.urlRedesSociales style='color: ' + c.color + ' ;')= res.urlRedesSociales
+                                                    i.bx.bxl-instagram-alt(style='color: ' + c.color + ' ;')
+                                                    a(href='http://www.instagram.com/' + res.urlRedesSociales style='color: ' + c.color + ' ;')= res.urlRedesSociales
+                                            else if (res.redesSociales == 'facebook')
                                                 li.collection-item
-                                                    i.bx.bx-current-location(style='color: ' + c.color + ' ;') 
-                                                    = res.direccion
+                                                    i.bx.bxl-facebook-circle(style='color: ' + c.color + ' ;')
+                                                    a(href='http://www.facebook.com/' + res.urlRedesSociales style='color: ' + c.color + ' ;')= res.urlRedesSociales
+                                            else if (res.redesSociales == 'twitter')
                                                 li.collection-item
-                                                    i.bx.bxs-truck(style='color: ' + c.color + ' ;') 
-                                                    span Delivery: 
-                                                        = res.delivery ? 'Si' : 'No'
-                                            .center-align
-                                                //a.btn.modal-trigger(href=('#modal' + res.idemprendimiento)) Mas información
-                                                if (res.sitioWeb === 1)
-                                                    a(href=res.nombreUrl).btn.purple Catalogo
-                                    .modal(id=('modal' + res.idemprendimiento))
-                                        .modal-content
-                                            .row
-                                                .col.m12
-                                                    p.center-align.f-3= res.emprendimiento
-                                                    p.text-bold Descripción: 
-                                                    p=res.descripcion
-                                                    p.text-bold Correo electrónico:
-                                                    p=res.correo
-                                                    p.text-bold Ubicación:
-                                                    each ci in city
-                                                        if (ci.idciudad === res.idciudad)    
-                                                            p=ci.ciudad
-                                                    if (res.foto1 == null)
-                                                    
+                                                    i.bx.bxl-twitter(style='color: ' + c.color + ' ;')  
+                                                    a(href='http://www.twitter.com/' + res.urlRedesSociales style='color: ' + c.color + ' ;')= res.urlRedesSociales
+                                            li.collection-item
+                                                i.bx.bx-current-location(style='color: ' + c.color + ' ;') 
+                                                = res.direccion
+                                            li.collection-item
+                                                i.bx.bxs-truck(style='color: ' + c.color + ' ;') 
+                                                span Delivery: 
+                                                    = res.delivery ? 'Si' : 'No'
+                                        .center-align
+                                            //a.btn.modal-trigger(href=('#modal' + res.idemprendimiento)) Mas información
+                                            if (res.sitioWeb === 1)
+                                                a(href=res.nombreUrl).btn.purple Catalogo
+                                .modal(id=('modal' + res.idemprendimiento))
+                                    .modal-content
+                                        .row
+                                            .col.m12
+                                                p.center-align.f-3= res.emprendimiento
+                                                p.text-bold Descripción: 
+                                                p=res.descripcion
+                                                p.text-bold Correo electrónico:
+                                                p=res.correo
+                                                p.text-bold Ubicación:
+                                                each ci in city
+                                                    if (ci.idciudad === res.idciudad)    
+                                                        p=ci.ciudad
+                                                if (res.foto1 == null)
+                                                
+                                                else
+                                                    if (!res.foto2 && !res.foto3 && !res.foto4 && !res.foto5 && !res.foto6)
+                                                        #carousel-modal-single.carousel.carousel-slider.pt-5    
+                                                            if (res.foto1)
+                                                                .carousel-item
+                                                                    img(src=res.foto1 alt='carousel_one').responsive-img.materialboxed
                                                     else
-                                                        if (!res.foto2 && !res.foto3 && !res.foto4 && !res.foto5 && !res.foto6)
-                                                            #carousel-modal-single.carousel.carousel-slider.pt-5    
-                                                                if (res.foto1)
-                                                                    .carousel-item
-                                                                        img(src=res.foto1 alt='carousel_one').responsive-img.materialboxed
-                                                        else
-                                                            #carousel-modal.carousel.carousel-slider.pt-5
-                                                                if (res.foto1)
-                                                                    .carousel-item
-                                                                        img(src=res.foto1 alt='carousel_one').responsive-img.materialboxed
-                                                                if (res.foto2)
-                                                                    .carousel-item
-                                                                        img(src=res.foto2 alt='carousel_two').responsive-img.materialboxed
-                                                                if (res.foto3)
-                                                                    .carousel-item
-                                                                        img(src=res.foto3 alt='carousel_three').responsive-img.materialboxed
-                                                                if (res.foto4)
-                                                                    .carousel-item
-                                                                        img(src=res.foto4 alt='carousel_four').responsive-img.materialboxed
-                                                                if (res.foto5)
-                                                                    .carousel-item
-                                                                        img(src=res.foto5 alt='carousel_five').responsive-img.materialboxed
-                                                                if (res.foto6)
-                                                                    .carousel-item
-                                                                        img(src=res.foto6 alt='carousel_six').responsive-img.materialboxed
+                                                        #carousel-modal.carousel.carousel-slider.pt-5
+                                                            if (res.foto1)
+                                                                .carousel-item
+                                                                    img(src=res.foto1 alt='carousel_one').responsive-img.materialboxed
+                                                            if (res.foto2)
+                                                                .carousel-item
+                                                                    img(src=res.foto2 alt='carousel_two').responsive-img.materialboxed
+                                                            if (res.foto3)
+                                                                .carousel-item
+                                                                    img(src=res.foto3 alt='carousel_three').responsive-img.materialboxed
+                                                            if (res.foto4)
+                                                                .carousel-item
+                                                                    img(src=res.foto4 alt='carousel_four').responsive-img.materialboxed
+                                                            if (res.foto5)
+                                                                .carousel-item
+                                                                    img(src=res.foto5 alt='carousel_five').responsive-img.materialboxed
+                                                            if (res.foto6)
+                                                                .carousel-item
+                                                                    img(src=res.foto6 alt='carousel_six').responsive-img.materialboxed
                 else 
                     .divider.mt-1.mb-3
                     p.center-align No existen publicidades en esta categoría.
