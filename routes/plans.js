@@ -21,8 +21,18 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         cb(null, file.originalname);
     }
-  });
-const upload = multer({ storage });
+});
+
+  const fileFilter = (req, file, cb) => {
+    const allowedFileExt = ['image/jpeg', 'image/jpg', 'image/png']
+    if(allowedFileExt.includes(file.mimetype)) {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({ storage, fileFilter });
 
 const uploads = upload.fields( 
     [ 

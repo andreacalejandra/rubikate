@@ -236,10 +236,9 @@ exports.userDelete = async (req, res) => {
     }
 }
 
-exports.postUserCreate = async (res, req) => {
+exports.postUserCreate = async (req, res) => {
     const errors = [];
     const { usuario, clave, clave_repeat, pregunta, respuesta, correo } = req.body;
-    console.log(usuario, clave, clave_repeat, pregunta, respuesta, correo)
     const claveHash = await helpers.encryptPassword(clave);
     const respHash = await helpers.encryptPassword(respuesta);
     const newUser = {
@@ -520,11 +519,220 @@ exports.getPublishPage = async (req, res) => {
 exports.getPublishUpdate = async (req, res) => {
     const { id } = req.params;
     const rest = await pool.query('SELECT * FROM emprendimientos, publicaciones, usuarios WHERE emprendimientos.idemprendimiento = publicaciones.idemprendimiento AND usuarios.idusuario = emprendimientos.idusuario AND emprendimientos.idemprendimiento = ?', [id]);
+    const idpublish = rest[0].idpublicacion
+    const photos = await pool.query('SELECT * FROM fotos WHERE idpublicacion = ?', [idpublish])
     const result = rest[0];
     res.render('admin/sections/publish/action', {
         section: 'Modificar emprendimiento',
-        result
+        result,
+        photos
     })
+}
+
+exports.postPublishUpdateLogo = async (req, res) => {
+    const { id } = req.body
+    const image = req.file
+    const dir = '/img/emprendimientos/'
+    try {
+        const newLogo = {
+            logo: dir + image.filename
+        }
+        const result = await pool.query('UPDATE emprendimientos SET ? WHERE idemprendimiento = ?', [newLogo, id])
+        console.log(result)
+
+        let accion = 'Se actualizaron el logotipo de un emprendimiento.';
+        const newAction = {
+            accion
+        };
+
+        await pool.query('INSERT INTO acciones SET ?', [newAction]);
+        const rows = await pool.query('SELECT idaccion FROM acciones WHERE accion = ?', [accion]);
+        
+        const idaccion = rows[0].idaccion;
+
+        const newAuditory = {
+            idadministrador: req.user.id,
+            idaccion,
+            tabla: 'emprendimientos'
+        };
+
+        await pool.query('INSERT INTO auditorias SET ?', [newAuditory]);
+        req.flash('success', 'Se ha realizado el proceso con éxito.');
+        res.redirect('/admin/publish');
+    } catch (e) {
+        console.log(e)
+        req.flash('danger', 'No se ha podido realizar el proceso, intentelo nuevamente.');
+        res.redirect('/admin/publish');
+    }
+}
+
+exports.postPublishUpdateImageUni = async (req, res) => {
+    const image = req.file
+    const { id, photo } = req.body
+    const dir = '/img/emprendimientos/'
+    try {
+        if (parseInt(photo) == 1) {
+            const newPhoto = {
+                foto1: dir + image.filename
+            }
+    
+            const result = await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhoto, id])
+            console.log(result)
+        }
+        if (parseInt(photo) == 2) {
+            const newPhoto = {
+                foto2: dir + image.filename
+            }
+    
+            const result = await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhoto, id])
+            console.log(result)
+        }
+        if (parseInt(photo) == 3) {
+            const newPhoto = {
+                foto3: dir + image.filename
+            }
+    
+            const result = await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhoto, id])
+            console.log(result)
+        }
+        if (parseInt(photo) == 4) {
+            const newPhoto = {
+                foto4: dir + image.filename
+            }
+    
+            const result = await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhoto, id])
+            console.log(result)
+        }
+        if (parseInt(photo) == 5) {
+            const newPhoto = {
+                foto5: dir + image.filename
+            }
+    
+            const result = await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhoto, id])
+            console.log(result)
+        }
+        if (parseInt(photo) == 6) {
+            const newPhoto = {
+                foto6: dir + image.filename
+            }
+    
+            const result = await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhoto, id])
+            console.log(result)
+        }
+
+        let accion = 'Se actualizaron las fotos de un emprendimiento.';
+        const newAction = {
+            accion
+        };
+
+        await pool.query('INSERT INTO acciones SET ?', [newAction]);
+        const rows = await pool.query('SELECT idaccion FROM acciones WHERE accion = ?', [accion]);
+        
+        const idaccion = rows[0].idaccion;
+
+        const newAuditory = {
+            idadministrador: req.user.id,
+            idaccion,
+            tabla: 'emprendimientos'
+        };
+
+        await pool.query('INSERT INTO auditorias SET ?', [newAuditory]);
+        req.flash('success', 'Se ha realizado el proceso con éxito.');
+        res.redirect('/admin/publish');
+    } catch (e) {
+        console.log(e)
+        req.flash('danger', 'No se ha podido realizar el proceso, intentelo nuevamente.');
+        res.redirect('/admin/publish'); 
+    }
+    
+
+    
+}
+
+exports.postPublishUpdateImagesAll = async (req, res) => {
+    const images = req.files
+    const { id } = req.body
+    const dir = '/img/emprendimientos/'
+    try {
+        if (images.length == 1) {
+            const newPhotos = {
+                foto1: dir + images[0]['filename'],
+            }
+            await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhotos, id])
+        }
+        if (images.length == 2) {
+            const newPhotos = {
+                foto1: dir + images[0]['filename'],
+                foto2: dir + images[1]['filename'],
+            }
+            await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhotos, id])
+        }
+    
+        if (images.length == 3) {
+            const newPhotos = {
+                foto1: dir + images[0]['filename'],
+                foto2: dir + images[1]['filename'],
+                foto3: dir + images[2]['filename'],
+            }
+            await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhotos, id])
+        }
+    
+        if (images.length == 4) {
+            const newPhotos = {
+                foto1: dir + images[0]['filename'],
+                foto2: dir + images[1]['filename'],
+                foto3: dir + images[2]['filename'],
+                foto4: dir + images[3]['filename'],
+            }
+            await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhotos, id])
+        }
+        if (images.length == 5) {
+            const newPhotos = {
+                foto1: dir + images[0]['filename'],
+                foto2: dir + images[1]['filename'],
+                foto3: dir + images[2]['filename'],
+                foto4: dir + images[3]['filename'],
+                foto5: dir + images[4]['filename'],
+            }
+            await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhotos, id])
+        }
+        if (images.length == 6) {
+            const newPhotos = {
+                foto1: dir + images[0]['filename'],
+                foto2: dir + images[1]['filename'],
+                foto3: dir + images[2]['filename'],
+                foto4: dir + images[3]['filename'],
+                foto5: dir + images[4]['filename'],
+                foto6: dir + images[5]['filename'],
+            }
+            await pool.query('UPDATE fotos SET ? WHERE idpublicacion = ?', [newPhotos, id])
+        }
+
+        let accion = 'Se actualizaron las fotos de un emprendimiento.';
+        const newAction = {
+            accion
+        };
+
+        await pool.query('INSERT INTO acciones SET ?', [newAction]);
+        const rows = await pool.query('SELECT idaccion FROM acciones WHERE accion = ?', [accion]);
+        
+        const idaccion = rows[0].idaccion;
+
+        const newAuditory = {
+            idadministrador: req.user.id,
+            idaccion,
+            tabla: 'fotos'
+        };
+
+        await pool.query('INSERT INTO auditorias SET ?', [newAuditory]);
+        req.flash('success', 'Se ha realizado el proceso con éxito.');
+        res.redirect('/admin/publish');
+    } catch (e) {
+        console.log(e)
+        req.flash('danger', 'No se ha podido realizar el proceso, intentelo nuevamente.');
+        res.redirect('/admin/publish'); 
+    }
+    
 }
 
 exports.postPublishUpdate = async (req, res) => {

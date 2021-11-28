@@ -21,8 +21,42 @@ const storageCategories = multer.diskStorage({
         cb(null, file.originalname)
     }
   })
-const upload_categories = multer({ storage: storageCategories })
+  
+    const fileFilter = (req, file, cb) => {
+        const allowedFileExt = ['image/jpeg', 'image/jpg', 'image/png']
+        if(allowedFileExt.includes(file.mimetype)) {
+            cb(null, true)
+        } else {
+            cb(null, false)
+        }
+    }
 
+const upload_categories = multer({ storage: storageCategories, fileFilter })
+
+/**
+ * Publicaciones - Fotos
+ */
+ const storagePublish = multer.diskStorage({
+    destination: (req, file, cb) => {
+        var dir = path.join(__dirname, '../public/img/emprendimientos/');
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true }, (err) => {
+                if (err) return err;
+            })
+        }
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+
+const upload_publish = multer({ storage: storagePublish, fileFilter })
+
+const uploads_photos = upload_publish.array('images', 6)
+
+
+const upload_photo = upload_publish.single('image')
 /**
  * Slide
  */
@@ -40,26 +74,8 @@ const storageSlide = multer.diskStorage({
         cb(null, file.originalname)
     }
   })
-const upload_slide = multer({ storage: storageSlide })
+const upload_slide = multer({ storage: storageSlide, fileFilter })
 
-/**
- * Emprendimiento
- */
- const storagePost = multer.diskStorage({
-    destination: (req, file, cb) => {
-        var dir = path.join(__dirname, '../public/img/posts')
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true }, (err) => {
-                if (err) return err;
-            })
-        }
-        cb(null, dir)
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-  })
-const upload_post = multer({ storage: storagePost })
 /**
  * ALiados
  */
@@ -77,7 +93,7 @@ const storageAlly = multer.diskStorage({
         cb(null, file.originalname)
     }
   })
-const upload_ally = multer({ storage: storageAlly })
+const upload_ally = multer({ storage: storageAlly, fileFilter })
 // #end
 /**
  * Home
@@ -144,7 +160,13 @@ app.get('/publish/upd/:id', AdminController.getPublishUpdate)
 
 app.get('/publish/view/:id', AdminController.getPublishView)
 
-app.post('/publish/upd', AdminController.getPublishUpdate)
+app.post('/publish/upd/logo', upload_photo, AdminController.postPublishUpdateLogo)
+
+app.post('/publish/upd', AdminController.postPublishUpdate)
+
+app.post('/publish/upd/photos', uploads_photos, AdminController.postPublishUpdateImagesAll)
+
+app.post('/publish/upd/photo', upload_photo, AdminController.postPublishUpdateImageUni)
 
 app.post('/publish/block/:id', AdminController.postPublishBlock)
 

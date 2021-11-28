@@ -5,66 +5,148 @@ block content
         h1 #{section}
     .form__layout
         if (result) 
-            form(action='/admin/publish/upd' method='post')
-                input(type='hidden' value=result.idemprendimiento name='id')
-                input(type='hidden' value=result.idusuario name='uid')
-                .form.mb-3
-                    input(type='text' name='emprendimiento' value=result.emprendimiento placeholder='Nombre del emprendimiento' required)
-                    label(for='emprendimiento') Nombre del emprendimiento
-                .row
-                    .col-md
+            .row
+                .col-md-3
+                    img(src=result.logo).img-border.bs-1
+                    form(action='/admin/publish/upd/logo' method='post' enctype='multipart/form-data').mt-3
+                        input(type='hidden' value=result.idemprendimiento name='id')
+                        .form-simple
+                            p Logo del emprendimiento
+                            input(type='file' name='image' accept="image/png, image/jpeg, image/jpg" onchange='this.form.submit()' required)#image
+                .col-md-9
+                    form(action='/admin/publish/upd' method='post')
+                        input(type='hidden' value=result.idemprendimiento name='id')
+                        input(type='hidden' value=result.idusuario name='uid')
                         .form.mb-3
-                            input(type='text' name='telefono' value=result.telefono placeholder='Número del emprendimiento' required)
-                            label(for='telefono') Teléfono
-                    .col-md
+                            input(type='text' name='emprendimiento' value=result.emprendimiento placeholder='Nombre del emprendimiento' required)
+                            label(for='emprendimiento') Nombre del emprendimiento
+                        .row
+                            .col-md
+                                .form.mb-3
+                                    input(type='text' name='telefono' value=result.telefono placeholder='Número del emprendimiento' required)
+                                    label(for='telefono') Teléfono
+                            .col-md
+                                .form.mb-3
+                                    input(type='text' name='correo' value=result.correo placeholder='Correo electrónico del emprendimiento' required)
+                                    label(for='correo') Correo electrónico
+                            .col-md
+                                .form.mb-3
+                                    select(name='delivery' required)
+                                        option(disabled selected=(result.delivery == null ? true: false)) Seleccione
+                                        option(value='1' selected=(result.delivery == 1 ? true: false)) Si
+                                        option(value='0' selected=(result.delivery == 0 ? true: false)) No
+                                    label(for='Delivery') Delivery
                         .form.mb-3
-                            input(type='text' name='correo' value=result.correo placeholder='Correo electrónico del emprendimiento' required)
-                            label(for='correo') Correo electrónico
-                    .col-md
+                            input(type='text' name='coordenadas' value=result.coordenadas placeholder='Coordenadas del emprendimiento')
+                            label(for='coordenadas') Coordenadas del emprendimiento
+                        .border-bottom.mt-2.mb-3
+                        .text-center
+                            p Red social actual
+                            if (result.redesSociales === 'twitter')
+                                a.text-purple(href='http://www.twitter.com/' + result.urlRedesSociales)= 'http://www.twitter.com/' + result.urlRedesSociales
+                            if (result.redesSociales === 'facebook')
+                                a.text-purple(href='http://www.facebook.com/' + result.urlRedesSociales)= 'http://www.facebook.com/' + result.urlRedesSociales                        
+                            if (result.redesSociales === 'instagram')
+                                a.text-purple(href='http://www.instagram.com/' + result.urlRedesSociales)= 'http://www.instagram.com/' + result.urlRedesSociales
+                        .border-bottom.mt-2.mb-3
+                        .row
+                            .col-md
+                                .form.mb-3
+                                    select(name='redesSociales')
+                                        option(value='' selected= (result.redesSociales === '' ? true : false)) Ninguno
+                                        option(value='instagram' selected=(result.redesSociales == 'instagram' ? true : false)) Instagram
+                                        option(value='twitter' selected=(result.redesSociales == 'twitter' ? true : false)) Twitter
+                                        option(value='facebook' selected=(result.redesSociales == 'facebook' ? true : false)) Facebook                                
+                                    label(for='redesSociales') Red social
+                            .col-md
+                                .form.mb-3
+                                    input(type='text' name='urlRedesSociales' value=result.urlRedesSociales placeholder='URL de la red social')
+                                    label(for='urlRedesSociales') URL de la red social
                         .form.mb-3
-                            select(name='delivery' required)
-                                option(disabled selected) Seleccione
-                                option(value='1') Si
-                                option(value='0') No
-                            label(for='Delivery') Delivery
-                .form.mb-3
-                    input(type='text' name='coordenadas' value=result.coordenadas placeholder='Coordenadas del emprendimiento')
-                    label(for='coordenadas') Coordenadas del emprendimiento
-                .border-bottom.mt-2.mb-3
-                .text-center
-                    p Red social actual
-                    a.text-purple(href=result.urlRedesSociales)= result.urlRedesSociales
-                .border-bottom.mt-2.mb-3
-                .row
-                    .col-md
-                        .form.mb-3
-                            select(name='redesSociales')
-                                option(value='' selected= (result.redesSociales === '' ? true : false)) Ninguno
-                                option(value='instagram' selected=(result.redesSociales == 'instagram' ? true : false)) Instagram
-                                option(value='twitter' selected=(result.redesSociales == 'twitter' ? true : false)) Twitter
-                                option(value='facebook' selected=(result.redesSociales == 'facebook' ? true : false)) Facebook                                
-                            label(for='redesSociales') Red social
-                    .col-md
-                        .form.mb-3
-                            input(type='text' name='urlRedesSociales' placeholder='URL de la red social')
-                            label(for='urlRedesSociales') URL de la red social
-                .form.mb-3
-                    input(type='text' name='direccion' value=result.direccion placeholder='Dirección del direccion' required)
-                    label(for='direccion') Dirección del emprendimiento
-                .row
-                    .col-md
-                        .form.mb-3
-                            select(name='sitioWeb')
-                                option(disabled selected) Seleccione
-                                option(value='1') Si
-                                option(value='0') No
-                            label(for='emprendimiento') Katalogo del emprendimiento
-                    .col-md
-                        .form.mb-3
-                            input(type='text' value=result.nombreUrl name='nombreUrl')
-                            label(for='emprendimiento') URL katalogo
-                .text-center
-                    button(type='submit').button-hovered.purple_custom.text-white Guardar
+                            input(type='text' name='direccion' value=result.direccion placeholder='Dirección del direccion' required)
+                            label(for='direccion') Dirección del emprendimiento
+                        .row
+                            .col-md
+                                .form.mb-3
+                                    select(name='sitioWeb')
+                                        option(disabled selected) Seleccione
+                                        option(value='1') Si
+                                        option(value='0') No
+                                    label(for='emprendimiento') Katalogo del emprendimiento
+                            .col-md
+                                .form.mb-3
+                                    input(type='text' value=result.nombreUrl name='nombreUrl' disabled)
+                                    label(for='emprendimiento') URL katalogo
+                        .text-center
+                            button(type='submit').button-hovered.purple_custom.text-white Actualizar información
+            .border-bottom.mt-3.mb-3
+            .card.mb-3.bs-1.has-rounded-md
+                .card-header
+                    h2.text-bold.text-center Actualización de imágenes
+                    .card-body 
+                    .row
+                        .col-md-12               
+                            #carousel-admin(style='max-height: 600px')
+                                each f in photos
+                                    if (f.foto1)
+                                        .slide-content
+                                            img(src=f.foto1 style='max-height: 600px;width:100%')
+                                    if (f.foto2)
+                                        .slide-content
+                                            img(src=f.foto2 style='max-height: 600px;width:100%')
+                                    if (f.foto3)
+                                        .slide-content
+                                            img(src=f.foto3 style='max-height: 600px;width:100%')
+                                    if (f.foto4)
+                                        .slide-content
+                                            img(src=f.foto4 style='max-height: 600px;width:100%')
+                                    if (f.foto5)
+                                        .slide-content
+                                            img(src=f.foto5 style='max-height: 600px;width:100%')
+                                    if (f.foto6)
+                                        .slide-content
+                                            img(src=f.foto6 style='max-height: 600px;width:100%')    
+                        .border-bottom.mb-3.mt-3
+                    h4.text-bold.text-center Acciones disponibles
+                    .text-center
+                        p.mb-4 Indique que desea realizar con dicha solicitud
+                        .form-check.form-check-inline
+                            input(type='radio' name='option' value='1')#disable.form-check-input
+                            label(for='disable').form-check-label Actualización general
+                        .form-check.form-check-inline
+                            input(type='radio' name='option' value='0')#enable.form-check-input
+                            label(for='enable').form-check-label Actualización unitaria
+                        #form_one.mt-3
+                            p Para actualizar las imagenes debe colocar un máximo de 6 imagenes estas serán actualizadas en orden.
+                            form(action='/admin/publish/upd/photos' method='post' enctype='multipart/form-data')
+                                input(type='hidden' value=result.idpublicacion name='id')
+                                .form.mb-3
+                                    input(type='file' name='images' multiple accept="image/png, image/jpeg, image/jpg" required)#images
+                                    label(for='images') Imágenes del emprendimiento
+                                .text-center
+                                    button(type='submit').button-hovered.purple_custom.text-white Actualizar imágenes
+                        #form_two.mt-3
+                            p Para actualizar las imagenes debe colocar un máximo de 6 imagenes estas serán actualizadas en orden.
+                            form(action='/admin/publish/upd/photo' method='post' enctype='multipart/form-data')
+                                input(type='hidden' value=result.idpublicacion name='id')
+                                .row
+                                    .col-md-6
+                                        .form.mb-3
+                                            select(name='photo')
+                                                option(disabled selected) Seleccione foto a actualizar
+                                                option(value='1') Foto 1
+                                                option(value='2') Foto 2
+                                                option(value='3') Foto 3
+                                                option(value='4') Foto 4
+                                                option(value='5') Foto 5
+                                                option(value='6') Foto 6
+                                            label(for='photo') Foto del emprendimiento
+                                    .col-md-6
+                                        .form.mb-3
+                                            input(type='file' name='image' accept="image/png, image/jpeg, image/jpg" required)#images
+                                            label(for='images') Imágen del emprendimiento
+                                .text-center
+                                    button(type='submit').button-hovered.purple_custom.text-white Actualizar imágen
     a(href='/admin').button__back Volver al inicio
     script.
         var editor = new FroalaEditor('#descripcion', {

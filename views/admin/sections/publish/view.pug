@@ -36,8 +36,17 @@ block content
                                 span.text-normal=e.delivery === 1 ? 'Si' : 'No'
                             p.text-bold Red Social seleccionada: 
                                 span.text-normal.text-capitalize=e.redesSociales 
-                            p.text-bold URI de la red social: 
+                            p.text-bold Nombre de la red social: 
                                 span.text-normal=e.urlRedesSociales
+                            .mt-3
+                            .border-bottom.mt-3.mb-3
+                            p.text-bold Acceso rápido: 
+                                if (e.redesSociales === 'twitter')    
+                                    a.text-normal.text-purple(href='https://twitter.com/' + e.urlRedesSociales) https://twitter.com/#{e.urlRedesSociales}
+                                if (e.redesSociales === 'facebook')    
+                                    a.text-normal.text-purple(href='https://facebook.com/' + e.urlRedesSociales) https://facebook.com/#{e.urlRedesSociales}
+                                if (e.redesSociales === 'instagram')    
+                                    a.text-normal.text-purple(href='https://instagram.com/' + e.urlRedesSociales) https://instagram.com/#{e.urlRedesSociales}
                             each c in rows_c
                                 p.text-bold Dirección: 
                                     span.text-normal=e.direccion + ', ' + c.ciudad + '. ' + c.estado
